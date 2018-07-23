@@ -6,6 +6,12 @@ import formers.core.object.Form;
 import formers.core.object.FormID;
 import formers.core.object.Input;
 
+/**
+ * Provides access to administrative user functionalities.
+ * 
+ * @author jackietan
+ *
+ */
 public class AdminCore {
     String accountName;
 
@@ -26,5 +32,4 @@ public class AdminCore {
     public void viewResult(String ID) {
 
     }
-
 }

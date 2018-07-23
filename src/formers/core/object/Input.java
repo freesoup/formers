@@ -1,5 +1,11 @@
 package formers.core.object;
 
+/**
+ * Represents the format of a single question in a form
+ * 
+ * @author jackietan
+ *
+ */
 public class Input {
     private String question;
     // TODO: Change to enum

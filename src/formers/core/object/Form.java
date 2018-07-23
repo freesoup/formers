@@ -5,6 +5,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Class to represent the layout of a form.
+ * 
+ * @author jackietan
+ *
+ */
 public class Form {
     private String preamble;
     private String ID;

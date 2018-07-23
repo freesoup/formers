@@ -1,4 +1,4 @@
-package formers.core.object;
+package formers.core.form.utils;
 
 /**
  * Represents the format of a single question in a form

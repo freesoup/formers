@@ -28,6 +28,6 @@ public class UserCore {
             responses.addResponse(answer);
         }
 
-        db.submit(responses);
+        db.submitResponse(responses);
     }
 }

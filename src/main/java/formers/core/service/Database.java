@@ -14,8 +14,12 @@ public class Database {
 
     }
 
-    public void submit(FormResponse responses) {
+    public void submitResponse(FormResponse responses) {
         // TODO Auto-generated method stub
+
+    }
+
+    public void submitNewForm(FormFormat form) {
 
     }
 

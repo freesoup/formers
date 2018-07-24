@@ -5,7 +5,6 @@ import java.util.List;
 import formers.core.form.utils.FormFormat;
 import formers.core.form.utils.FormID;
 import formers.core.form.utils.FormResult;
-import formers.core.form.utils.Input;
 import formers.core.service.Database;
 
 /**
@@ -25,10 +24,10 @@ public class AdminCore {
         return form;
     }
 
-    public void addField(FormFormat form, List<Input> inputList) {
-        for (Input field : inputList) {
-            form.addInput(field);
-        }
+    public boolean submitFormFormat(FormFormat form) {
+        Database db = new Database();
+        db.submitNewForm(form);
+        return true;
     }
 
     public List<String> viewAllForm() {

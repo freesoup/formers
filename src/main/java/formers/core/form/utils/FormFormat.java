@@ -41,11 +41,25 @@ public class FormFormat {
         this.dateCreated = date;
     }
 
-    public void setDateExpirty(Date date) {
+    public void setDateExpiry(Date date) {
         this.dateExpiry = date;
     }
 
     public void addInput(Input field) {
         fields.add(field);
+    }
+
+    public void addFormFieldStart(String legend) {
+        Input fieldStart = new Input(legend, FormType.FIELDSTART);
+        fields.add(fieldStart);
+    }
+
+    public void addFormFieldEnd() {
+        Input fieldEnd = new Input(FormType.FIELDEND);
+        fields.add(fieldEnd);
+    }
+
+    public List<Input> getFields() {
+        return fields;
     }
 }

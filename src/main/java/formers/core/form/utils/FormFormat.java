@@ -13,6 +13,7 @@ import java.util.Objects;
  *
  */
 public class FormFormat {
+    private String formTitle;
     private String preamble;
     private String ID;
     private String owner;
@@ -23,6 +24,10 @@ public class FormFormat {
     public FormFormat() {
         this.dateCreated = new Date();
         this.fields = new ArrayList<Input>();
+    }
+
+    public void addTitle(String info) {
+        this.formTitle = info;
     }
 
     public void addPreamble(String info) {
@@ -61,5 +66,13 @@ public class FormFormat {
 
     public List<Input> getFields() {
         return fields;
+    }
+
+    public String getPreamble() {
+        return preamble;
+    }
+
+    public String getTitle() {
+        return formTitle;
     }
 }

@@ -6,7 +6,7 @@ import formers.core.form.utils.FormFormat;
 
 public interface FormHTMLParser {
 
-    List<String> parseFormFormatToHTML(FormFormat form);
+    String parseFormFormatToHTML(FormFormat form);
 
     FormFormat parseHTMLtoFormFormat(List<String> listInputHtml);
 

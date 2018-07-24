@@ -19,11 +19,11 @@ public class FormFormat {
     private String owner;
     private Date dateCreated;
     private Date dateExpiry;
-    private List<Input> fields;
+    private List<Question> questions;
 
     public FormFormat() {
         this.dateCreated = new Date();
-        this.fields = new ArrayList<Input>();
+        this.questions = new ArrayList<Question>();
     }
 
     public void addTitle(String info) {
@@ -50,22 +50,12 @@ public class FormFormat {
         this.dateExpiry = date;
     }
 
-    public void addInput(Input field) {
-        fields.add(field);
+    public void addQuestion(Question field) {
+        questions.add(field);
     }
 
-    public void addFormFieldStart(String legend) {
-        Input fieldStart = new Input(legend, FormType.FIELDSTART);
-        fields.add(fieldStart);
-    }
-
-    public void addFormFieldEnd() {
-        Input fieldEnd = new Input(FormType.FIELDEND);
-        fields.add(fieldEnd);
-    }
-
-    public List<Input> getFields() {
-        return fields;
+    public List<Question> getQuestions() {
+        return questions;
     }
 
     public String getPreamble() {

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Create a form</title>
+<script type="text/javascript" src="js/submit.js"></script>
+</head>
+<body>
+	<form action="formsubmit" method="post">
+	<div id="form-container">
+		<div id='question-0'>
+			Question: <input type="text" name="question"><br /> 
+			Type: <select
+				name="type">
+				<option value="text">Text</option>
+				<option value="radio">Radio</option>
+				<option value="checkbox">Checkbox</option>
+				<option value="textarea">TextArea</option>
+			</select><br /> 
+			Name: <input type="text" name="name"><br />
+		</div>
+		</div>
+		<button type="button" onclick="appendNewQuestion()">Add new Question</button><br>
+		<input type="submit">
+	</form>
+</body>
+</html>

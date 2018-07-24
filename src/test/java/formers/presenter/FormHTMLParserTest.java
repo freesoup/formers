@@ -5,9 +5,11 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import formers.boundary.ui.presenter.FormHTMLParser;
+import formers.boundary.ui.presenter.FormHTMLParserImpl;
 import formers.core.form.utils.FormFormat;
 import formers.core.form.utils.FormType;
-import formers.core.form.utils.Input;
+import formers.core.form.utils.Question;
 
 public class FormHTMLParserTest {
     FormHTMLParser form;
@@ -24,7 +26,7 @@ public class FormHTMLParserTest {
         newForm.addID("abc132");
         newForm.addAdmin("tester1");
         newForm.addFormFieldStart("Questions");
-        newForm.addInput(new Input("How would you rate it from 1~10", FormType.TEXT, "q1"));
+        newForm.addInput(new Question("How would you rate it from 1~10", FormType.TEXT, "q1"));
         newForm.addFormFieldEnd();
         List<String> htmlInputs = form.parseFormFormatToHTML(newForm);
 

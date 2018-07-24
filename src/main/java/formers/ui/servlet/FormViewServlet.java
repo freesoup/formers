@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import formers.presenter.FormersPresenter;
-import formers.presenter.FormersPresenterImpl;
+import formers.boundary.ui.presenter.FormersPresenter;
+import formers.boundary.ui.presenter.FormersPresenterImpl;
 
 /**
  * Servlet implementation class FormViewServlet

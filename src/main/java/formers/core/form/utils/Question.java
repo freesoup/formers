@@ -1,40 +1,34 @@
 package formers.core.form.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Represents the format of a single question in a form
  * 
  * @author jackietan
  *
  */
-public class Input {
+public class Question {
     private String question;
-    // TODO: Change to enum
     private FormType type;
     private String paramName;
     private String placeholder;
-    private boolean checked;
+    private List<Option> options;
 
-    public Input(String question, FormType type, String name) {
+    public Question(String question, FormType type, String name) {
         this.question = question;
         this.type = type;
         this.paramName = name;
-    }
-
-    public Input(String question, FormType type) {
-        this.question = question;
-        this.type = type;
-    }
-
-    public Input(FormType type) {
-        this.type = type;
+        options = new ArrayList<Option>();
     }
 
     public void setPlaceholder(String info) {
         this.placeholder = info;
     }
 
-    public void setChecked(boolean enabled) {
-        this.checked = enabled;
+    public void addOption(Option option) {
+        options.add(option);
     }
 
     public FormType getType() {
@@ -53,7 +47,7 @@ public class Input {
         return placeholder;
     }
 
-    public boolean getChecked() {
-        return checked;
+    public List<Option> getOptions() {
+        return options;
     }
 }

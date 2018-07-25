@@ -9,6 +9,6 @@ package formers.core.form.utils;
 public class FormID {
     public static String generateFormID() {
         // TODO:logic
-        return "abc123";
+        return Long.toHexString(Double.doubleToLongBits(Math.random()));
     }
 }

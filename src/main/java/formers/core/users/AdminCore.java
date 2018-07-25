@@ -2,10 +2,11 @@ package formers.core.users;
 
 import java.util.List;
 
+import formers.core.database.Database;
+import formers.core.database.DatabaseImpl;
 import formers.core.form.utils.FormFormat;
 import formers.core.form.utils.FormID;
 import formers.core.form.utils.FormResult;
-import formers.core.service.Database;
 
 /**
  * Provides access to administrative user functionalities.
@@ -29,25 +30,25 @@ public class AdminCore {
     }
 
     public boolean submitFormFormat(FormFormat form) {
-        Database db = new Database();
+        Database db = new DatabaseImpl();
         db.submitNewForm(form);
         return true;
     }
 
     public List<String> viewAllForm() {
-        Database db = new Database();
+        Database db = new DatabaseImpl();
         List<String> idList = db.getAllFormId();
         return idList;
     }
 
     public FormFormat viewForm(String ID) {
-        Database db = new Database();
+        Database db = new DatabaseImpl();
         FormFormat form = db.getForm(ID);
         return form;
     }
 
     public FormResult viewResult(String ID) {
-        Database db = new Database();
+        Database db = new DatabaseImpl();
         FormResult results = db.getFormResult(ID);
         return results;
     }

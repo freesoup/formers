@@ -9,13 +9,14 @@
     <servlet-class>formers.ui.servlet.AdminDashboardServlet</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>FormCreation</servlet-name>
-    <servlet-class>formers.ui.servlet.FormCreationServlet</servlet-class>
+    <servlet-name>FormSubmit</servlet-name>
+    <servlet-class>formers.ui.servlet.FormSubmitServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>FormView</servlet-name>
     <servlet-class>formers.ui.servlet.FormViewServlet</servlet-class>
   </servlet>
+  
   <servlet-mapping>
     <servlet-name>PrinterServlet</servlet-name>
     <url-pattern>/cool</url-pattern>
@@ -25,8 +26,8 @@
     <url-pattern>/mainadmin</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>FormCreation</servlet-name>
-    <url-pattern>/createform</url-pattern>
+    <servlet-name>FormSubmit</servlet-name>
+    <url-pattern>/submitform</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>FormView</servlet-name>

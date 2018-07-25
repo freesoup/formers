@@ -16,6 +16,10 @@ import formers.core.service.Database;
 public class AdminCore {
     String accountName;
 
+    public AdminCore() {
+        this.accountName = "Tom";
+    }
+
     public FormFormat initForm() {
         FormFormat form = new FormFormat();
         form.addAdmin(accountName);

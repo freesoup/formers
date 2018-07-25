@@ -44,4 +44,12 @@ public class FormersPresenterImpl implements FormersPresenter {
         newForm.addQuestion(q4);
         return newForm;
     }
+
+    @Override
+    public String viewForm(FormFormat submittedForm) {
+        FormHTMLParser parser = new FormHTMLParserImpl();
+        String form = parser.parseFormFormatToHTML(submittedForm);
+
+        return form;
+    }
 }

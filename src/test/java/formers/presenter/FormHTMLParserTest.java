@@ -1,7 +1,5 @@
 package formers.presenter;
 
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,10 +23,8 @@ public class FormHTMLParserTest {
         newForm.addPreamble("Rate your experience");
         newForm.addID("abc132");
         newForm.addAdmin("tester1");
-        newForm.addFormFieldStart("Questions");
-        newForm.addInput(new Question("How would you rate it from 1~10", FormType.TEXT, "q1"));
-        newForm.addFormFieldEnd();
-        List<String> htmlInputs = form.parseFormFormatToHTML(newForm);
+        newForm.addQuestion(new Question("How would you rate it from 1~10", FormType.TEXT, "q1"));
+        String htmlInputs = form.parseFormFormatToHTML(newForm);
 
         System.out.println(htmlInputs);
     }

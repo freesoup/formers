@@ -6,7 +6,7 @@ import formers.core.database.Database;
 import formers.core.database.DatabaseImpl;
 import formers.core.form.utils.FormFormat;
 import formers.core.form.utils.FormID;
-import formers.core.form.utils.FormResult;
+import formers.core.form.utils.FormResponse;
 
 /**
  * Provides access to administrative user functionalities.
@@ -15,15 +15,12 @@ import formers.core.form.utils.FormResult;
  *
  */
 public class AdminCore {
-    String accountName;
-
     public AdminCore() {
-        this.accountName = "Tom";
     }
 
-    public FormFormat initForm() {
+    public FormFormat initForm(String user) {
         FormFormat form = new FormFormat();
-        form.addAdmin(accountName);
+        form.addAdmin(user);
         form.addID(FormID.generateFormID());
 
         return form;
@@ -35,21 +32,21 @@ public class AdminCore {
         return true;
     }
 
-    public List<String> viewAllForm() {
+    public List<FormFormat> viewAllForm(String user) {
         Database db = new DatabaseImpl();
-        List<String> idList = db.getAllFormId();
-        return idList;
+        List<FormFormat> formatList = db.getAllFormFormat(user);
+        return formatList;
     }
 
-    public FormFormat viewForm(String ID) {
+    public FormFormat viewForm(String formID) {
         Database db = new DatabaseImpl();
-        FormFormat form = db.getForm(ID);
+        FormFormat form = db.getForm(formID);
         return form;
     }
 
-    public FormResult viewResult(String ID) {
+    public FormResponse viewResult(String formID, String user) {
         Database db = new DatabaseImpl();
-        FormResult results = db.getFormResult(ID);
+        FormResponse results = db.getFormResult(user, formID);
         return results;
     }
 }

@@ -16,6 +16,7 @@ public class FormHTMLParserImpl implements FormHTMLParser {
         output.append("<h2>" + form.getPreamble() + "</h2>");
         output.append("<p>From is valid during this period " + form.getDateCreatedinString());
         output.append(" to " + form.getDateExpiryinString());
+        output.append("<br>");
 
         for (Question question : questions) {
             StringBuilder formHTML = new StringBuilder();

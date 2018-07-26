@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import formers.boundary.ui.presenter.FormersPresenter;
 import formers.boundary.ui.presenter.FormersPresenterImpl;
@@ -16,13 +17,13 @@ import formers.core.form.utils.FormFormat;
 /**
  * Servlet implementation class FormSubmitServlet
  */
-public class FormSubmitServlet extends HttpServlet {
+public class NewFormSubmitServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FormSubmitServlet() {
+    public NewFormSubmitServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,7 +35,11 @@ public class FormSubmitServlet extends HttpServlet {
             throws ServletException, IOException {
         FormersSubmitter submitterInstance = new FormersSubmitterImpl();
 
-        FormFormat submittedForm = submitterInstance.submitNewForm(request.getParameterMap());
+        HttpSession session = request.getSession();
+        String user = session.getAttribute("user").toString();
+
+        FormFormat submittedForm = submitterInstance.submitNewForm(request.getParameterMap(), user);
+        String formID = submittedForm.getID();
 
         if (submittedForm != null) {
             FormersPresenter presenterInstance = new FormersPresenterImpl();
@@ -45,6 +50,11 @@ public class FormSubmitServlet extends HttpServlet {
             response.getWriter().append("<form>");
             response.getWriter().append(html);
             response.getWriter().append("</form>");
+            response.getWriter().append("You may share the form link over at<br>");
+            response.getWriter()
+                    .append("<input class='requestlink' value='http://formers.internal.worksap.com:8080/formers/viewform?requestID="
+                            + formID
+                            + "'>");
 
         } else {
             response.getWriter().append("Error during FormFormat Creation!<br>");

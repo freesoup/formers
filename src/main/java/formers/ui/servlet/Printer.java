@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class Printer
@@ -69,5 +70,8 @@ public class Printer extends HttpServlet {
         out.println("<a class='linkbtn' href='mainadmin'>Continue As Admin</a>");
         out.println("<a class='linkbtn' href='mainuser'>Continue As User</a>");
         out.println("</body></html>");
+
+        HttpSession session = request.getSession();
+        session.setAttribute("user", user);
     }
 }

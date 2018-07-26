@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import formers.boundary.ui.presenter.FormersPresenter;
 import formers.boundary.ui.presenter.FormersPresenterImpl;
@@ -40,10 +41,10 @@ public class FormViewServlet extends HttpServlet {
         out.println("<!DOCTYPE html>");
         out.println("<html><head>");
         out.println("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
-        out.println("<title>Viewing Form</title></head>");
+        out.println("<title>Formers Form</title></head>");
         out.println("<body>");
 
-        out.println("<form action='formsubmit' method='post'>");
+        out.println("<form action='respondform' method='post'>");
         out.println(htmlCodes);
         out.println("<input type='submit' value='Submit Form'>  ");
         out.println("<input type='reset' value='Reset Form Fields'>");
@@ -51,6 +52,9 @@ public class FormViewServlet extends HttpServlet {
 
         out.println("</body></html>");
         response.getWriter().append("Served at: ").append(request.getContextPath());
+
+        HttpSession session = request.getSession();
+        session.setAttribute("formID", requestID);
     }
 
     /**

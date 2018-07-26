@@ -74,6 +74,14 @@ public class FormFormat {
         return formTitle;
     }
 
+    public String getID() {
+        return ID;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
     public Date getDateCreatedinDate() {
         return dateCreated;
     }

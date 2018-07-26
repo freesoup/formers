@@ -1,19 +1,23 @@
 package formers.boundary.ui.submitter;
 
+import java.util.List;
 import java.util.Map;
 
 import formers.core.form.utils.FormFormat;
+import formers.core.form.utils.FormResponse;
 import formers.core.form.utils.FormType;
 import formers.core.form.utils.Option;
 import formers.core.form.utils.Question;
+import formers.core.form.utils.Response;
 import formers.core.users.AdminCore;
+import formers.core.users.UserCore;
 
 public class FormersSubmitterImpl implements FormersSubmitter {
 
     @Override
-    public FormFormat submitNewForm(Map<String, String[]> map) {
+    public FormFormat submitNewForm(Map<String, String[]> map, String userName) {
         AdminCore admin = new AdminCore();
-        FormFormat newForm = admin.initForm();
+        FormFormat newForm = admin.initForm(userName);
 
         String[] questions = map.get("question");
         String[] questionsType = map.get("type");
@@ -67,6 +71,47 @@ public class FormersSubmitterImpl implements FormersSubmitter {
         admin.submitFormFormat(newForm);
 
         return newForm;
+    }
+
+    @Override
+    public FormResponse submitNewResponse(Map<String, String[]> map, String formID, String userName) {
+        UserCore user = new UserCore();
+        FormResponse responses = user.initFormResponse(userName);
+        responses.setFormID(formID);
+
+        FormFormat correspondingFormat = user.viewForm(formID);
+
+        List<Question> questions = correspondingFormat.getQuestions();
+
+        for (int i = 0; i < questions.size(); i++) {
+            Question currQuestion = questions.get(i);
+
+            String question = currQuestion.getQuestion();
+            FormType type = currQuestion.getType();
+            String param = currQuestion.getParam();
+            Response response = new Response(question);
+
+            switch (type) {
+            case TEXT:
+            case RADIO:
+            case TEXTAREA:
+                String answer = map.get(param)[0];
+                response.addAnswer(answer);
+                break;
+
+            case CHECKBOX:
+                String[] answerList = map.get(param);
+                for (int j = 0; j < answerList.length; j++) {
+                    response.addAnswer(answerList[j]);
+                }
+            }
+
+            responses.addResponse(response);
+        }
+
+        user.submitForm(responses);
+
+        return responses;
     }
 
 }

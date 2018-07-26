@@ -1,13 +1,26 @@
 package formers.core.form.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Response {
     String question;
-    String answer;
-    String number;
+    List<String> answers;
 
-    public Response(String question, String answer, String number) {
+    public Response(String question) {
         this.question = question;
-        this.answer = answer;
-        this.number = number;
+        answers = new ArrayList<String>();
+    }
+
+    public void addAnswer(String answer) {
+        this.answers.add(answer);
+    }
+
+    public String getQuestion() {
+        return this.getQuestion();
+    }
+
+    public List<String> getAnswers() {
+        return this.answers;
     }
 }

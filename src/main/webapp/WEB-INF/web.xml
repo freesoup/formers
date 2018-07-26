@@ -13,8 +13,8 @@
 		<servlet-class>formers.ui.servlet.AdminDashboardServlet</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>FormSubmit</servlet-name>
-		<servlet-class>formers.ui.servlet.FormSubmitServlet</servlet-class>
+		<servlet-name>NewFormSubmit</servlet-name>
+		<servlet-class>formers.ui.servlet.NewFormSubmitServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>FormView</servlet-name>
@@ -26,6 +26,12 @@
 		<description></description>
 		<servlet-class>formers.ui.servlet.UserDashboardServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>FormResponseServlet</servlet-name>
+		<display-name>FormResponseServlet</display-name>
+		<description></description>
+		<servlet-class>formers.ui.servlet.FormResponseServlet</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>PrinterServlet</servlet-name>
@@ -36,7 +42,7 @@
 		<url-pattern>/mainadmin</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>FormSubmit</servlet-name>
+		<servlet-name>NewFormSubmit</servlet-name>
 		<url-pattern>/submitform</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
@@ -46,6 +52,10 @@
 	<servlet-mapping>
 		<servlet-name>UserDashboardServlet</servlet-name>
 		<url-pattern>/mainuser</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>FormResponseServlet</servlet-name>
+		<url-pattern>/respondform</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>fontslogin.html</welcome-file>

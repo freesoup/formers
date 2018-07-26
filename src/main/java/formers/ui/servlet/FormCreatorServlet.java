@@ -1,23 +1,22 @@
 package formers.ui.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class AdminDashboardServlet
+ * Servlet implementation class FormCreatorServlet
  */
-public class AdminDashboardServlet extends HttpServlet {
+public class FormCreatorServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminDashboardServlet() {
+    public FormCreatorServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,19 +27,7 @@ public class AdminDashboardServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // TODO Auto-generated method stub
-        String cssTag = "<link rel='stylesheet' type='text/css' href='css/main.css'>";
-
-        response.setContentType("text/html; charset=UTF-8");
-
-        PrintWriter out = response.getWriter();
-        out.println("<!DOCTYPE html>");
-        out.println("<html><head>");
-        out.println("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
-        out.println(cssTag);
-        out.println("<title>Formers Dashboard</title></head>");
-        out.println("<body><a class='linkbtn' href='createform'>Create a new form.</a>");
-        out.println("<p>Placeholder for form dashboard<p>");
-        out.println("</body></html>");
+        response.getWriter().append("Served at: ").append(request.getContextPath());
     }
 
     /**

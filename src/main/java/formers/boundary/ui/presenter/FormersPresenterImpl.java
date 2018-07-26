@@ -7,9 +7,9 @@ import formers.core.form.utils.Question;
 import formers.core.users.AdminCore;
 
 public class FormersPresenterImpl implements FormersPresenter {
-    public String viewForm() {
+    public String viewForm(String requestID) {
         AdminCore admin = new AdminCore();
-        FormFormat newForm = generateSampleForm();
+        FormFormat newForm = admin.viewForm(requestID);
 
         FormHTMLParser parser = new FormHTMLParserImpl();
         String form = parser.parseFormFormatToHTML(newForm);

@@ -8,19 +8,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import formers.boundary.ui.presenter.FormersPresenter;
-import formers.boundary.ui.presenter.FormersPresenterImpl;
-
 /**
- * Servlet implementation class FormViewServlet
+ * Servlet implementation class UserDashboardServlet
  */
-public class FormViewServlet extends HttpServlet {
+public class UserDashboardServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FormViewServlet() {
+    public UserDashboardServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,9 +27,8 @@ public class FormViewServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        FormersPresenter presenter = new FormersPresenterImpl();
-        String requestID = request.getParameter("requestID");
-        String htmlCodes = presenter.viewForm(requestID);
+        // TODO Auto-generated method stub
+        String cssTag = "<link rel='stylesheet' type='text/css' href='css/main.css'>";
 
         response.setContentType("text/html; charset=UTF-8");
 
@@ -40,17 +36,15 @@ public class FormViewServlet extends HttpServlet {
         out.println("<!DOCTYPE html>");
         out.println("<html><head>");
         out.println("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
-        out.println("<title>Viewing Form</title></head>");
-        out.println("<body>");
-
-        out.println("<form action='formsubmit' method='post'>");
-        out.println(htmlCodes);
-        out.println("<input type='submit' value='Submit Form'>  ");
-        out.println("<input type='reset' value='Reset Form Fields'>");
-        out.println("<form>");
-
+        out.println(cssTag);
+        out.println("<title>Formers User Dashboard</title></head>");
+        out.println("<body><h2>Enter form id to fetch your form</h2>");
+        out.println("<form action='viewform' method='get'>");
+        out.println("<input type='text' name='requestID'>");
+        out.println("<input type='submit'>");
+        out.println("</form>");
+        out.println("<p>Placeholder for form dashboard<p>");
         out.println("</body></html>");
-        response.getWriter().append("Served at: ").append(request.getContextPath());
     }
 
     /**

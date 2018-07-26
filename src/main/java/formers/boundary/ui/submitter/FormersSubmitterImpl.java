@@ -30,15 +30,19 @@ public class FormersSubmitterImpl implements FormersSubmitter {
             case "checkbox":
                 question = new Question(questions[i], FormType.CHECKBOX, questionsParamName[i]);
                 String[] optionFields = map.get("optionfield-" + i);
-                for (int j = 0; j < optionFields.length; j++) {
-                    question.addOption(new Option(optionFields[j], false));
+                if (optionFields != null) {
+                    for (int j = 0; j < optionFields.length; j++) {
+                        question.addOption(new Option(optionFields[j], false));
+                    }
                 }
                 break;
             case "radio":
                 question = new Question(questions[i], FormType.RADIO, questionsParamName[i]);
                 String[] optionFields1 = map.get("optionfield-" + i);
-                for (int j = 0; j < optionFields1.length; j++) {
-                    question.addOption(new Option(optionFields1[j], false));
+                if (optionFields1 != null) {
+                    for (int j = 0; j < optionFields1.length; j++) {
+                        question.addOption(new Option(optionFields1[j], false));
+                    }
                 }
                 break;
             case "textarea":

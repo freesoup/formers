@@ -7,10 +7,12 @@ import com.worksap.company.dto.annotation.Key;
 public class FormResponseDto {
     @Key
     private String formId;
+    private String formRecipient;
     private String stringJson;
 
-    private FormResponseDto(String id, String json) {
+    private FormResponseDto(String id, String formRecipient, String json) {
         this.formId = id;
+        this.formRecipient = formRecipient;
         this.stringJson = json;
     }
 
@@ -20,5 +22,9 @@ public class FormResponseDto {
 
     private String getFormResponse() {
         return stringJson;
+    }
+
+    private String getRecipient() {
+        return formRecipient;
     }
 }

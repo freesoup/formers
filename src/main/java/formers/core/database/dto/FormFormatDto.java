@@ -7,15 +7,25 @@ import com.worksap.company.dto.annotation.Key;
 public class FormFormatDto {
     @Key
     private String formID;
+    private String formOwner;
     private String formFormatJson;
 
-    public FormFormatDto(String id, String json) {
+    public FormFormatDto() {
+
+    }
+
+    public FormFormatDto(String id, String owner, String json) {
         this.formID = id;
+        this.formOwner = owner;
         this.formFormatJson = json;
     }
 
     public String getFormID() {
         return formID;
+    }
+
+    public String formOwner() {
+        return formOwner;
     }
 
     public String getFormFormat() {

@@ -19,7 +19,7 @@ public class KVATest {
 
         KeyValueAccess kva = new CassandraAccessDatastax(setting);
 
-        FormFormatDto formFormat = new FormFormatDto("abc123", "test");
+        FormFormatDto formFormat = new FormFormatDto("abc123", "test", "test");
         kva.createTable(FormFormatDto.class);
         kva.insert(formFormat);
     }

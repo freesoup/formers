@@ -20,6 +20,15 @@ public class FormersSubmitterImpl implements FormersSubmitter {
         String[] questionsParamName = map.get("name");
         newForm.addTitle(map.get("title")[0]);
         newForm.addPreamble(map.get("preamble")[0]);
+
+        String dateCreated = map.get("createdate")[0];
+
+        if (dateCreated != null && !dateCreated.isEmpty()) {
+            newForm.setDateCreated(dateCreated);
+        }
+
+        newForm.setDateExpiry(map.get("expirydate")[0]);
+
         for (int i = 0; i < questions.length; i++) {
             Question question;
             switch (questionsType[i]) {

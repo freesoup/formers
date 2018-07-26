@@ -13,9 +13,9 @@
 			<br>
 			Description: <input type="text" name="preamble"><br />
 			<br>
-			Set Starting Date (Optional) <input type="date" name="expiryDate"><br />
+			Set Starting Date (Optional) <input type="date" name="createdate" id="createdate" onchange="setMinMax()"><br />
 			<br>
-			Set Deadline <input type="date" name="expiryDate"><br />
+			Set Deadline (at least 1 day after today or Starting Date) <input type="date" name="expirydate" id="expirydate" onchange="setMinMax()"><br />
 			<br>
 		</div>
 		<div id='question-0'>

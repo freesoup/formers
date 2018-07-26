@@ -46,3 +46,27 @@ function check(element) {
 		element.parentElement.querySelector(".options").setAttribute("hidden", true);
 	}
 }
+
+window.onload = function() {
+	document.getElementById('createdate').valueAsDate = new Date();
+	
+	var minExpiry = new Date();
+	minExpiry.setDate(minExpiry.getDate() + 1);
+	
+	var newExpiry = minExpiry.toISOString().split('T')[0];
+	document.getElementById('expirydate').setAttribute('min', newExpiry);
+}
+
+function setMinMax() {
+	var createDate = document.getElementById('createdate').valueAsDate;
+	var expiryDate = document.getElementById('expirydate').valueAsDate;
+
+	createDate.setDate(createDate.getDate() + 1);
+	expiryDate.setDate(expiryDate.getDate() - 1);
+	
+	var newMax = expiryDate.toISOString().split('T')[0];
+	var newMin = createDate.toISOString().split('T')[0];
+	
+	document.getElementById('createdate').setAttribute('max', newMax);
+	document.getElementById('expirydate').setAttribute('min', newMin);
+}

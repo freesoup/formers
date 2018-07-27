@@ -45,4 +45,8 @@ public class FormResponse {
     public Date getDate() {
         return dateOfSubmission;
     }
+
+    public List<Response> getResponses() {
+        return responses;
+    }
 }

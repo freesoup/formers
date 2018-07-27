@@ -49,4 +49,10 @@ public class AdminCore {
         FormResponse results = db.getFormResult(user, formID);
         return results;
     }
+
+    public List<FormResponse> viewResultsOfAForm(String formID) {
+        Database db = new DatabaseImpl();
+        List<FormResponse> listResults = db.getAllFormResponse(formID);
+        return listResults;
+    }
 }

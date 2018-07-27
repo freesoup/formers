@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Good Thymes Virtual Grocery</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+	<h1>Results for</h1>
+	<p th:text=${format.ID}></p>
+	<table id="userTable" border="1">
+		<tr th:object=${format}>
+			<th>Recipient</th>
+			<th>Date of Completion</th>
+			<th th:each="question :*{questions}" th:text="${question.question}"></th>
+		</tr>
+		<tr th:object=${resultlist} th:each="result :${resultlist}">
+			<td th:text="${result.recipient}"></td>
+			<td th:text="${result.getDateOfSubmissionInString()}"></td>
+			<td th:each="response :${result.responses}" th:text ="${response.answers}">asd</td>			
+		</tr>
+	</table>
+
+</body>
+
+</html>

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import formers.boundary.ui.submitter.FormersSubmitter;
 import formers.boundary.ui.submitter.FormersSubmitterImpl;
+import formers.core.form.utils.FormID;
 import formers.core.form.utils.FormResponse;
 
 /**
@@ -34,7 +35,13 @@ public class FormResponseServlet extends HttpServlet {
         // TODO Auto-generated method stub
         HttpSession session = request.getSession();
         String formID = session.getAttribute("formID").toString();
-        String user = session.getAttribute("user").toString();
+        String user;
+
+        try {
+            user = session.getAttribute("user").toString();
+        } catch (NullPointerException npe) {
+            user = FormID.generateFormID();
+        }
 
         FormersSubmitter submitterInstance = new FormersSubmitterImpl();
         FormResponse submittedForm = submitterInstance.submitNewResponse(request.getParameterMap(), formID, user);

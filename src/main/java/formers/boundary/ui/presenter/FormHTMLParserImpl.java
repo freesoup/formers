@@ -70,8 +70,10 @@ public class FormHTMLParserImpl implements FormHTMLParser {
             String formName = form.getTitle();
             String formId = form.getID();
 
-            output.append("<form action='formresult'><input type='hidden' value='" + formId + "'</input>");
-            output.append("<input type='submit' value='" + formName + "'s Result'>");
+            output.append("<form action='formresult' method='post'><input type='hidden' name='requestID' value='"
+                    + formId
+                    + "'>");
+            output.append("<input type='submit' value='" + formName + " Result'>");
             output.append("</form><br>");
         }
 

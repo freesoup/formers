@@ -3,6 +3,7 @@ package formers.boundary.ui.presenter;
 import java.util.List;
 
 import formers.core.form.utils.FormFormat;
+import formers.core.form.utils.FormResponse;
 import formers.core.form.utils.FormType;
 import formers.core.form.utils.Option;
 import formers.core.form.utils.Question;
@@ -62,5 +63,13 @@ public class FormersPresenterImpl implements FormersPresenter {
 
         FormHTMLParser parser = new FormHTMLParserImpl();
         return parser.parseFormFormatPreview(listForm);
+    }
+
+    @Override
+    public String viewResults(String formID) {
+        // TODO:adasd
+        AdminCore admin = new AdminCore();
+        List<FormResponse> listResults = admin.viewResultsOfAForm(formID);
+        return null;
     }
 }

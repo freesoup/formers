@@ -17,7 +17,7 @@ public class Response {
     }
 
     public String getQuestion() {
-        return this.getQuestion();
+        return this.question;
     }
 
     public List<String> getAnswers() {

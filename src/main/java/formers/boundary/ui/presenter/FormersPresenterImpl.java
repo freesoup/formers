@@ -1,5 +1,7 @@
 package formers.boundary.ui.presenter;
 
+import java.util.List;
+
 import formers.core.form.utils.FormFormat;
 import formers.core.form.utils.FormType;
 import formers.core.form.utils.Option;
@@ -51,5 +53,14 @@ public class FormersPresenterImpl implements FormersPresenter {
         String form = parser.parseFormFormatToHTML(submittedForm);
 
         return form;
+    }
+
+    @Override
+    public String viewForms(String userName) {
+        AdminCore admin = new AdminCore();
+        List<FormFormat> listForm = admin.viewAllForm(userName);
+
+        FormHTMLParser parser = new FormHTMLParserImpl();
+        return parser.parseFormFormatPreview(listForm);
     }
 }

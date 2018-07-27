@@ -39,7 +39,7 @@ public class AdminDashboardServlet extends HttpServlet {
         out.println(cssTag);
         out.println("<title>Formers Dashboard</title></head>");
         out.println("<body><a class='linkbtn' href='formcreate.html'>Create a new form.</a>");
-        out.println("<a class='linkbtn' href='viewform'>View a new form.</a>");
+        out.println("<a class='linkbtn' href='allforms'>View all your created forms.</a>");
         out.println("<a class='linkbtn' href='viewformresult'>View a form's result</a>");
         out.println("<p>Placeholder for form dashboard<p>");
         out.println("</body></html>");

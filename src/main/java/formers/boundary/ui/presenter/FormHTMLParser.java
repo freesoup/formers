@@ -8,6 +8,6 @@ public interface FormHTMLParser {
 
     String parseFormFormatToHTML(FormFormat form);
 
-    FormFormat parseHTMLtoFormFormat(List<String> listInputHtml);
+    String parseFormFormatPreview(List<FormFormat> listForm);
 
 }

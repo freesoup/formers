@@ -56,6 +56,10 @@ public class NewFormSubmitServlet extends HttpServlet {
                             + formID
                             + "'>");
 
+            response.getWriter().append("<br><form action='mainadmin' method='post'>");
+            response.getWriter().append("<input type='submit' value='Return to admin main page'>");
+            response.getWriter().append("</form><br>");
+
         } else {
             response.getWriter().append("Error during FormFormat Creation!<br>");
             response.getWriter().append("Served at: ").append(request.getContextPath());

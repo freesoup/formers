@@ -32,6 +32,24 @@
 		<description></description>
 		<servlet-class>formers.ui.servlet.FormResponseServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>AdminFormViewServlet</servlet-name>
+		<display-name>AdminFormViewServlet</display-name>
+		<description></description>
+		<servlet-class>formers.ui.servlet.AdminFormViewServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>FormResultPreviewServlet</servlet-name>
+		<display-name>FormResultPreviewServlet</display-name>
+		<description></description>
+		<servlet-class>formers.ui.servlet.FormResultPreviewServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>FormResultServlet</servlet-name>
+		<display-name>FormResultServlet</display-name>
+		<description></description>
+		<servlet-class>formers.ui.servlet.FormResultServlet</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>PrinterServlet</servlet-name>
@@ -56,6 +74,18 @@
 	<servlet-mapping>
 		<servlet-name>FormResponseServlet</servlet-name>
 		<url-pattern>/respondform</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AdminFormViewServlet</servlet-name>
+		<url-pattern>/allforms</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>FormResultPreviewServlet</servlet-name>
+		<url-pattern>/FormResultPreviewServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>FormResultServlet</servlet-name>
+		<url-pattern>/formresult</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>fontslogin.html</welcome-file>

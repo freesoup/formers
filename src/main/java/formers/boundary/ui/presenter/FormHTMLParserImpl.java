@@ -63,9 +63,19 @@ public class FormHTMLParserImpl implements FormHTMLParser {
     }
 
     @Override
-    public FormFormat parseHTMLtoFormFormat(List<String> listInputHtml) {
-        // TODO Auto-generated method stub
-        return null;
+    public String parseFormFormatPreview(List<FormFormat> listForm) {
+        StringBuilder output = new StringBuilder();
+
+        for (FormFormat form : listForm) {
+            String formName = form.getTitle();
+            String formId = form.getID();
+
+            output.append("<form action='formresult'><input type='hidden' value='" + formId + "'</input>");
+            output.append("<input type='submit' value='" + formName + "'s Result'>");
+            output.append("</form><br>");
+        }
+
+        return output.toString();
     }
 
 }

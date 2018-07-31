@@ -17,4 +17,8 @@ public interface Database {
     public FormFormat getForm(String iD);
 
     public FormResponse getFormResult(String user, String formID);
+
+    public String getPass(String user);
+
+    public boolean addNewAccount(String user, String hashedPass);
 }

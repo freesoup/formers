@@ -4,6 +4,20 @@
 
 <web-app>
 	<display-name>Formers Web Application</display-name>
+	
+	
+	<filter>
+		<filter-name>LoginFilter</filter-name>
+		<display-name>LoginFilter</display-name>
+		<description></description>
+		<filter-class>formers.ui.filter.LoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	
 	<servlet>
 		<servlet-name>PrinterServlet</servlet-name>
 		<servlet-class>formers.ui.servlet.Printer</servlet-class>
@@ -17,8 +31,8 @@
 		<servlet-class>formers.ui.servlet.NewFormSubmitServlet</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>FormView</servlet-name>
-		<servlet-class>formers.ui.servlet.FormViewServlet</servlet-class>
+		<servlet-name>UserFormView</servlet-name>
+		<servlet-class>formers.ui.servlet.UserFormFormatViewServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>UserDashboardServlet</servlet-name>
@@ -30,7 +44,7 @@
 		<servlet-name>FormResponseServlet</servlet-name>
 		<display-name>FormResponseServlet</display-name>
 		<description></description>
-		<servlet-class>formers.ui.servlet.FormResponseServlet</servlet-class>
+		<servlet-class>formers.ui.servlet.UserFormSubmittedServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>AdminFormViewServlet</servlet-name>
@@ -39,17 +53,30 @@
 		<servlet-class>formers.ui.servlet.AdminFormViewServlet</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>FormResultPreviewServlet</servlet-name>
-		<display-name>FormResultPreviewServlet</display-name>
-		<description></description>
-		<servlet-class>formers.ui.servlet.FormResultPreviewServlet</servlet-class>
-	</servlet>
-	<servlet>
 		<servlet-name>FormResultServlet</servlet-name>
 		<display-name>FormResultServlet</display-name>
 		<description></description>
-		<servlet-class>formers.ui.servlet.FormResultServlet</servlet-class>
+		<servlet-class>formers.ui.servlet.AdminFormResultServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>VerifyServlet</servlet-name>
+		<display-name>VerifyServlet</display-name>
+		<description></description>
+		<servlet-class>formers.ui.servlet.VerifyServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>MakeAccountServlet</servlet-name>
+		<display-name>MakeAccountServlet</display-name>
+		<description>For creating new users</description>
+		<servlet-class>formers.ui.servlet.MakeAccountServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>AccountCreationServlet</servlet-name>
+		<display-name>AccountCreationServlet</display-name>
+		<description></description>
+		<servlet-class>formers.ui.servlet.AccountCreationServlet</servlet-class>
+	</servlet>
+
 
 	<servlet-mapping>
 		<servlet-name>PrinterServlet</servlet-name>
@@ -64,7 +91,7 @@
 		<url-pattern>/submitform</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>FormView</servlet-name>
+		<servlet-name>UserFormView</servlet-name>
 		<url-pattern>/viewform</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
@@ -80,13 +107,23 @@
 		<url-pattern>/allforms</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>FormResultPreviewServlet</servlet-name>
-		<url-pattern>/FormResultPreviewServlet</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
 		<servlet-name>FormResultServlet</servlet-name>
 		<url-pattern>/formresult</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>VerifyServlet</servlet-name>
+		<url-pattern>/verify</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>MakeAccountServlet</servlet-name>
+		<url-pattern>/newuser</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AccountCreationServlet</servlet-name>
+		<url-pattern>/accountcreated</url-pattern>
+	</servlet-mapping>
+	
+	
 	<welcome-file-list>
 		<welcome-file>fontslogin.html</welcome-file>
 	</welcome-file-list>

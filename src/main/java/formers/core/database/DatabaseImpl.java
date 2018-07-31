@@ -11,6 +11,7 @@ import com.worksap.company.access.cassandra.setting.CassandraSetting;
 import com.worksap.company.dto.key.SearchCondition;
 import com.worksap.company.dto.key.SearchConditions;
 
+import formers.core.database.dto.AccountDto;
 import formers.core.database.dto.FormFormat2Dto;
 import formers.core.database.dto.FormFormatDto;
 import formers.core.database.dto.FormResponseDto;
@@ -141,5 +142,45 @@ public class DatabaseImpl implements Database {
         }
 
         return formFormats;
+    }
+
+    @Override
+    public String getPass(String user) {
+        CassandraSetting setting = new CassandraSetting();
+        setting.setHost("127.0.0.1");
+        setting.setNativeTransportPort(9042);
+        setting.setTenantID("admin");
+        setting.setSchema("formers");
+        KeyValueAccess kva = new CassandraAccessDatastax(setting);
+
+        AccountDto acdto = kva.getSingle(user, AccountDto.class);
+
+        if (acdto == null) {
+            return null;
+        }
+
+        return acdto.getHashedPass();
+    }
+
+    @Override
+    public boolean addNewAccount(String user, String hashedPass) {
+        CassandraSetting setting = new CassandraSetting();
+        setting.setHost("127.0.0.1");
+        setting.setNativeTransportPort(9042);
+        setting.setTenantID("admin");
+        setting.setSchema("formers");
+        KeyValueAccess kva = new CassandraAccessDatastax(setting);
+
+        kva.createTable(AccountDto.class);
+        AccountDto acdtoCheck = kva.getSingle(user, AccountDto.class);
+
+        if (acdtoCheck != null) {
+            return false;
+        }
+
+        AccountDto acdto = new AccountDto(user, hashedPass);
+        kva.insert(acdto);
+
+        return true;
     }
 }

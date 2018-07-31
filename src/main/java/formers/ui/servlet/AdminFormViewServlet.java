@@ -13,7 +13,7 @@ import formers.boundary.ui.presenter.FormersPresenter;
 import formers.boundary.ui.presenter.FormersPresenterImpl;
 
 /**
- * Servlet implementation class AdminFormViewServlet
+ * Servlet implementation class AdminFormViewServlet to be merged into adminDashboardServlet
  */
 public class AdminFormViewServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -35,11 +35,10 @@ public class AdminFormViewServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(false);
         String userName = session.getAttribute("user").toString();
 
         FormersPresenter presenterInstance = new FormersPresenterImpl();
-
         String forms = presenterInstance.viewForms(userName);
 
         String cssTag = "";

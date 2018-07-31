@@ -15,13 +15,13 @@ import formers.ui.thyme.IFormersController;
 /**
  * Servlet implementation class FormResultServlet
  */
-public class FormResultServlet extends HttpServlet {
+public class AdminFormResultServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FormResultServlet() {
+    public AdminFormResultServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

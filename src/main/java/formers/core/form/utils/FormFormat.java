@@ -74,6 +74,10 @@ public class FormFormat {
         return formTitle;
     }
 
+    public String getFormTitle() {
+        return formTitle;
+    }
+
     public String getID() {
         return ID;
     }

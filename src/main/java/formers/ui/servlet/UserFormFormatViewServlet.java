@@ -1,6 +1,8 @@
 package formers.ui.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,20 +12,17 @@ import javax.servlet.http.HttpSession;
 
 import formers.boundary.ui.presenter.FormersPresenter;
 import formers.boundary.ui.presenter.FormersPresenterImpl;
-import formers.boundary.ui.submitter.FormersSubmitter;
-import formers.boundary.ui.submitter.FormersSubmitterImpl;
-import formers.core.form.utils.FormFormat;
 
 /**
- * Servlet implementation class FormSubmitServlet
+ * Servlet implementation class FormViewServlet Displays the form for users to submit.
  */
-public class NewFormSubmitServlet extends HttpServlet {
+public class UserFormFormatViewServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NewFormSubmitServlet() {
+    public UserFormFormatViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,13 +32,10 @@ public class NewFormSubmitServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        FormersSubmitter submitterInstance = new FormersSubmitterImpl();
-
-        HttpSession session = request.getSession();
-        String user = session.getAttribute("user").toString();
-
-        FormFormat submittedForm = submitterInstance.submitNewForm(request.getParameterMap(), user);
-        String formID = submittedForm.getID();
+        FormersPresenter presenter = new FormersPresenterImpl();
+        String requestID = request.getParameter("requestID");
+        String htmlCodes = presenter.viewForm(requestID);
+        Date expiry = presenter.getExpiry(requestID);
 
         String css = "<link rel=\"stylesheet\"\r\n"
                 +
@@ -77,37 +73,33 @@ public class NewFormSubmitServlet extends HttpServlet {
                 +
                 "";
 
-        if (submittedForm != null) {
-            FormersPresenter presenterInstance = new FormersPresenterImpl();
+        response.setContentType("text/html; charset=UTF-8");
 
-            String html = presenterInstance.viewForm(submittedForm);
+        PrintWriter out = response.getWriter();
+        out.println("<!DOCTYPE html>");
+        out.println("<html><head>");
+        out.println(css);
+        out.println("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
+        out.println("<title>Formers Form</title></head>");
+        out.println("<body>");
+        out.println("<div id='page-container'>");
+        out.println("<form action='respondform' method='post'>");
 
-            response.getWriter().append("<!DOCTYPE html>");
-            response.getWriter().append("<html><head>");
-            response.getWriter().append(css);
-            response.getWriter().append("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
-            response.getWriter().append("<title>Form Preview</title></head>");
-            response.getWriter().append("<body>");
-            response.getWriter().append("<div id='page-container'>");
-            response.getWriter().append("<h1>Preview of your form</h1>");
-            response.getWriter().append("<form>");
-            response.getWriter().append(html);
-            response.getWriter().append("</form>");
-            response.getWriter().append("You may share the form link over at<br>");
-            response.getWriter()
-                    .append("<input class='requestlink' value='http://formers.internal.worksap.com:8080/formers/viewform?requestID="
-                            + formID
-                            + "'>");
+        out.println(htmlCodes);
 
-            response.getWriter().append("<br>");
-            response.getWriter().append("<a href='mainadmin'><button>Return to main page</button></a>");
-            response.getWriter().append("</div>");
-            response.getWriter().append("</body></html>");
-
+        if (expiry.before(new Date())) {
+            out.println("<p id='expired-msg'>This form is no longer allowing new responses</p>");
         } else {
-            response.getWriter().append("Error during FormFormat Creation!<br>");
-            response.getWriter().append("Served at: ").append(request.getContextPath());
+            out.println("<button type='submit' value='Submit Form'>Submit Form</button>");
+            out.println("<button type='reset' value='Reset Form Fields'>Reset Form Fields</button>");
         }
+
+        out.println("<form>");
+        out.println("</div>");
+        out.println("</body></html>");
+
+        HttpSession session = request.getSession();
+        session.setAttribute("formID", requestID);
     }
 
     /**
@@ -117,7 +109,6 @@ public class NewFormSubmitServlet extends HttpServlet {
             throws ServletException, IOException {
         // TODO Auto-generated method stub
         doGet(request, response);
-
     }
 
 }

@@ -15,14 +15,15 @@ import formers.core.form.utils.FormResponse;
 
 /**
  * Servlet implementation class FormResponseServlet
+ * Displays the Form for User after submitting
  */
-public class FormResponseServlet extends HttpServlet {
+public class UserFormSubmittedServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FormResponseServlet() {
+    public UserFormSubmittedServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

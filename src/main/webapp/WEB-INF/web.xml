@@ -47,12 +47,6 @@
 		<servlet-class>formers.ui.servlet.UserFormSubmittedServlet</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>AdminFormViewServlet</servlet-name>
-		<display-name>AdminFormViewServlet</display-name>
-		<description></description>
-		<servlet-class>formers.ui.servlet.AdminFormViewServlet</servlet-class>
-	</servlet>
-	<servlet>
 		<servlet-name>FormResultServlet</servlet-name>
 		<display-name>FormResultServlet</display-name>
 		<description></description>
@@ -101,10 +95,6 @@
 	<servlet-mapping>
 		<servlet-name>FormResponseServlet</servlet-name>
 		<url-pattern>/respondform</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>AdminFormViewServlet</servlet-name>
-		<url-pattern>/allforms</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>FormResultServlet</servlet-name>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Home Dashboard</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" media="all" 
+          href="css/application.css"/>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+	integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+	integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+	crossorigin="anonymous"></script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+	<div id="page-container">
+	<div id="form-description-container"> 
+	<h1 th:text="|Welcome ${session.user}|">Welcome</h1>
+	<p th:text="|Number forms: ${#lists.size(listFormat)}|"></p>
+	<a href="formcreate.html"><button>Create a new form</button></a>
+	</div>
+	<table id="userTable" border="1">
+		<tr th:object=${format}>
+			<th>Form No.</th>
+			<th>Form Name</th>
+			<th>Date Created</th>
+			<th>Date Expiry</th>
+			<th>View</th>
+			<th>Delete</th>
+		</tr>
+		<tr  th:each="format :${listFormat}">
+			<!-- resultStat is the defalt variable that contains iteration status of result -->
+			<td th:text="${formatStat.count}"></td>
+			<td th:text="${format.formTitle}"></td>
+			<td th:text="${format.getDateCreatedinString()}"></td>
+			<td th:text="${format.getDateExpiryinString()}"></td>
+			<td><a href="formresult" th:href="@{formresult(requestID=${format.ID})}"><button>View Results</button></a></td>
+			<td><button> Delete Button Placeholder</button></td>
+		</tr>
+	</table>
+	</div>
+
+</body>
+
+</html>

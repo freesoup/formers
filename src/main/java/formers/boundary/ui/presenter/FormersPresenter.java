@@ -9,8 +9,6 @@ public interface FormersPresenter {
 
     String viewForm(FormFormat submittedForm);
 
-    String viewForms(String userName);
-
     String viewResults(String formID);
 
     Date getExpiry(String requestID);

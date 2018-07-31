@@ -38,6 +38,7 @@ public class FormersApp {
 
         this.controllersByURL = new HashMap<String, IFormersController>();
         this.controllersByURL.put("/formresult", new FormResultController());
+        this.controllersByURL.put("/mainadmin", new AdminDashboardController());
 
     }
 

@@ -31,15 +31,6 @@ public class FormersPresenterImpl implements FormersPresenter {
     }
 
     @Override
-    public String viewForms(String userName) {
-        AdminCore admin = new AdminCore();
-        List<FormFormat> listForm = admin.viewAllForm(userName);
-
-        FormHTMLParser parser = new FormHTMLParserImpl();
-        return parser.parseFormFormatPreview(listForm);
-    }
-
-    @Override
     public String viewResults(String formID) {
         // TODO:adasd
         AdminCore admin = new AdminCore();

@@ -2,6 +2,7 @@ package formers.core.database;
 
 import java.util.List;
 
+import formers.core.authentication.Authorization;
 import formers.core.form.utils.FormFormat;
 import formers.core.form.utils.FormResponse;
 
@@ -21,4 +22,6 @@ public interface Database {
     public String getPass(String user);
 
     public boolean addNewAccount(String user, String hashedPass);
+
+    public Authorization getAuthority(String user);
 }

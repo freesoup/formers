@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import formers.boundary.ui.submitter.AccountService;
 import formers.boundary.ui.submitter.AccountServiceImpl;
+import formers.core.authentication.Authorization;
 
 /**
  * Servlet implementation class VerifyServlet
@@ -41,16 +42,26 @@ public class VerifyServlet extends HttpServlet {
             throws ServletException, IOException {
         String user = request.getParameter("user");
         String password = request.getParameter("password");
+        String target = request.getParameter("target");
 
         AccountService acservice = new AccountServiceImpl();
         boolean success = acservice.verifyLogIn(user, password);
+        Authorization authority = acservice.getAuthority(user);
+
+        if (target == null) {
+            // Will only be null when User accesses a page that is ignored by the filter.
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath()));
+        }
 
         if (success) {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
-            response.sendRedirect(response.encodeRedirectURL("cool"));
+            session.setAttribute("authority", authority);
+            System.out.println(request.getContextPath() + target);
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + target));
         } else {
-            response.sendRedirect(response.encodeRedirectURL(request.getContextPath()));
+            request.setAttribute("error", "Incorrect Username or Password!");
+            request.getRequestDispatcher("login").forward(request, response);
         }
     }
 

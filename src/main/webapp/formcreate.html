@@ -9,18 +9,18 @@
 	<form action="submitform" method="post">
 	<div id="form-container">
 		<div id='header'>
-			Title of Form: <input type="text" name="title"><br />
+			Title of Form: <input type="text" name="title" required><br />
 			<br>
-			Description: <input type="text" name="preamble"><br />
+			Description: <input type="text" name="preamble" required><br />
 			<br>
-			Set Starting Date (Optional) <input type="date" name="createdate" id="createdate" onchange="setMinMax()"><br />
+			Set Starting Date <input type="date" name="createdate" id="createdate" onchange="setMinMax()" required><br />
 			<br>
-			Set Deadline (at least 1 day after today or Starting Date) <input type="date" name="expirydate" id="expirydate" onchange="setMinMax()"><br />
+			Set Deadline (at least 1 day after today or Starting Date) <input type="date" name="expirydate" id="expirydate" onchange="setMinMax()" required><br />
 			<br>
 		</div>
 		<div id='question-0'>
-			Question: <input type="text" name="question"><br /> 
-			Name: <input type="text" name="name"><br />
+			Question: <input type="text" name="question" required><br /> 
+			Name: <input type="text" name="name" required><br />
 			Type: <select
 				name="type" onChange="check(this)">
 				<option value="text">Text</option>

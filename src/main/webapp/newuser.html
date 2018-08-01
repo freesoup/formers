@@ -30,10 +30,12 @@
 		<h1 class='pagetitle'>Create your account</h1>
 		<div class='form-container newacc-form'>
 			<form id='signup-form' action='accountcreated' method='post'>
-				<label for="username"> Username </label> <br> <input
-					type="text" name="newuser" id="username" autocomplete="off"><br>
+				<label for="username">Your Username</label> <br> <input
+					type="text" name="newuser" id="username" autocomplete="off" pattern=".{5,}" required
+					oninvalid="this.setCustomValidity('Your user username needs to be at least 5 characters long')" oninput="this.setCustomValidity('')"><br>
 				<label for="password"> Password </label> <br> <input
-					type="text" name="newpassword" id="password" autocomplete="off"><br>
+					type="password" name="newpassword" id="password" autocomplete="off" pattern=".{5,}" required
+					oninvalid="this.setCustomValidity('Your user password needs to be at least 5 characters long')" oninput="this.setCustomValidity('')"><br>
 				<div class='btn-container'>
 					<button type="submit" form="signup-form" value="Create new account">Create new account</button>
 				</div>

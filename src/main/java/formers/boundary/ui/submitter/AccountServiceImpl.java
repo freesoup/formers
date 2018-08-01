@@ -2,6 +2,7 @@ package formers.boundary.ui.submitter;
 
 import formers.core.authentication.Authenticator;
 import formers.core.authentication.AuthenticatorImpl;
+import formers.core.authentication.Authorization;
 import formers.core.users.AccountControl;
 
 public class AccountServiceImpl implements AccountService {
@@ -18,6 +19,13 @@ public class AccountServiceImpl implements AccountService {
         Authenticator controller = new AuthenticatorImpl();
 
         return controller.authenticate(user, password);
+    }
+
+    @Override
+    public Authorization getAuthority(String user) {
+        Authenticator controller = new AuthenticatorImpl();
+
+        return controller.getAuthorityLevel(user);
     }
 
 }

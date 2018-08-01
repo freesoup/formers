@@ -1,12 +1,3 @@
-@font-face {
-	font-family: 'dotsfont';
-	src: url('../fonts/disc.eot');
-	src: url('../fonts/disc.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/disc.woff') format('woff'), url('../fonts/disc.ttf')
-		format('truetype'), url('../fonts/disc.svg#dotsfontregular')
-		format('svg');
-}
-
 body, html {
 	height: 100%;
 }
@@ -38,7 +29,6 @@ body, html {
 
 #password {
 	width: 200px;
-	font-family: dotsfont;
 }
 
 #login-form {
@@ -68,4 +58,8 @@ button {
 	width:100%;
 	padding: 6px 6px 6px 6px;
 	border-radius: 5px;
+}
+
+.error {
+	color: #EE4C7C;
 }

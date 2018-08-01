@@ -44,20 +44,29 @@ public class LoginFilter implements Filter {
 
         boolean authenticated = (session != null) && (session.getAttribute("user") != null);
 
-        String currentURI = request.getRequestURI();
-        if (currentURI.equals("/formers/")
-                || currentURI.equals("/formers/viewform")
-                || currentURI.startsWith("/formers/css")
-                || currentURI.startsWith("/formers/js")
-                || currentURI.startsWith("/formers/verify")
-                || currentURI.startsWith("/formers/respondform")) {
+        String currentURI = request.getServletPath();
+        String currentQuery = request.getQueryString();
+        if (currentQuery == null) {
+            currentQuery = "";
+        }
+        if (currentURI == null
+                || currentURI.equals("/viewform")
+                || currentURI.startsWith("/css")
+                || currentURI.startsWith("/js")
+                || currentURI.startsWith("/verify")
+                || currentURI.startsWith("/respondform")
+                || currentURI.startsWith("/login")
+                || currentURI.startsWith("/newuser")
+                || currentURI.startsWith("/accountcreated")
+                || currentURI.startsWith("/redirect.jsp")) {
             // pass the request along the filter chain
             chain.doFilter(request, response);
         } else if (authenticated) {
             chain.doFilter(request, response);
         } else {
-            System.out.println(currentURI + " has been filtered away due to lack of session");
-            response.sendRedirect(response.encodeRedirectURL(request.getContextPath()));
+            request.setAttribute("error", "Please login before proceeeding!");
+            request.setAttribute("target", currentURI + "?" + currentQuery);
+            request.getRequestDispatcher("login").forward(request, response);
         }
     }
 

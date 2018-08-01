@@ -11,6 +11,7 @@ import com.worksap.company.access.cassandra.setting.CassandraSetting;
 import com.worksap.company.dto.key.SearchCondition;
 import com.worksap.company.dto.key.SearchConditions;
 
+import formers.core.authentication.Authorization;
 import formers.core.database.dto.AccountDto;
 import formers.core.database.dto.FormFormat2Dto;
 import formers.core.database.dto.FormFormatDto;
@@ -178,9 +179,28 @@ public class DatabaseImpl implements Database {
             return false;
         }
 
-        AccountDto acdto = new AccountDto(user, hashedPass);
+        AccountDto acdto = new AccountDto(user, hashedPass, Authorization.ADMIN);
         kva.insert(acdto);
 
         return true;
+    }
+
+    @Override
+    public Authorization getAuthority(String user) {
+        CassandraSetting setting = new CassandraSetting();
+        setting.setHost("127.0.0.1");
+        setting.setNativeTransportPort(9042);
+        setting.setTenantID("admin");
+        setting.setSchema("formers");
+        KeyValueAccess kva = new CassandraAccessDatastax(setting);
+
+        kva.createTable(AccountDto.class);
+        AccountDto acdtoCheck = kva.getSingle(user, AccountDto.class);
+
+        if (acdtoCheck != null) {
+            return Authorization.STRANGER;
+        } else {
+            return acdtoCheck.getAuthority();
+        }
     }
 }

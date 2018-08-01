@@ -11,7 +11,6 @@
 <link rel="stylesheet" type="text/css" href="css/login.css">
 
 <title>Formers</title>
-<script type="text/javascript" src="js/preventcopy.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 	crossorigin="anonymous"></script>
@@ -37,10 +36,12 @@
 			</div>
 			<div id="login-form">
 				<form action="verify" method="post" id="login">
+					<p class='error' th:if="${error} != null" th:text="${error}"></p>
 					<label for="username"> Username </label> <br> <input
 						type="text" name="user" id="username" autocomplete="off"><br>
 					<label for="password"> Password </label> <br> <input
-						type="text" name="password" id="password" autocomplete="off"><br>
+						type="password" name="password" id="password" autocomplete="off"><br>
+					<input type="hidden" name="target" id="target" autocomplete="off" th:value="(${target} == null)? '/mainadmin' : ${target}"><br>
 				</form>
 				<div class="btn-container">
 					<button type="submit" form='login'>Login</button>

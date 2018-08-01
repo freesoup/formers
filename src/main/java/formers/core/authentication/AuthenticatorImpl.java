@@ -19,4 +19,13 @@ public class AuthenticatorImpl implements Authenticator {
             return incomingHashPass.equals(hashedPass);
         }
     }
+
+    @Override
+    public Authorization getAuthorityLevel(String user) {
+        Database db = new DatabaseImpl();
+
+        Authorization authority = db.getAuthority(user);
+
+        return authority;
+    }
 }

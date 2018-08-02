@@ -4,52 +4,62 @@
 var questionNo = 1;
 
 function appendNewQuestion() {
-	var formContainer = document.getElementById('form-container');
-	var br = document.createElement("br");
+	var formContainer = document.getElementById('questions-container');
 
 	var newDiv = document.createElement("div");
 	newDiv.setAttribute("id", "question-" + questionNo);
-	newDiv.innerHTML = "Question: <input type='text' name='question'><br /> \
-	Name: <input type='text' name='name'><br /> \
-	Type: <select \
-		name='type' onChange='check(this)'> \
-		<option value='text'>Text</option> \
-		<option value='radio'>Radio</option> \
-		<option value='checkbox'>Checkbox</option> \
-		<option value='textarea'>TextArea</option> \
-	</select><br /> \
-	<div class='options' hidden disabled> \
-		<button type='button' onclick='appendNewOption(this)'>Add new Option</button><br> \
-	</div>";
+	newDiv.innerHTML = "<h2>Question " + ++questionNo + "</h2> \
+					<label>Question</label><br> \
+					<input type='text' name='question' required><br> \
+					<label>Type</label><br> \
+					<select name='type' onChange='check(this)'> \
+						<option value='text'>Text</option> \
+						<option value='radio'>Radio</option> \
+						<option value='checkbox'>Checkbox</option> \
+						<option value='textarea'>TextArea</option> \
+					</select> \
+					<hr class='break'>";
 
 	formContainer.appendChild(newDiv);
-
-	formContainer.appendChild(br);
-
-	questionNo++;
 }
 
 function appendNewOption(element) {
 	var newOption = document.createElement("div");
 	var questionnum = element.parentElement.parentElement.id.split("-")[1];
 	newOption.setAttribute("id", "option");
-	newOption.innerHTML = "Option: <input type='text' name='optionfield-"
-			+ questionnum + "'>";
-	element.parentElement.appendChild(newOption);
+	newOption.innerHTML = "<label>Option:</label> <input type='text' name='optionfield-"
+			+ questionnum + "' required> <button class='inline' type='button' onclick='deleteParentOption(this)'>Delete</button>";
+
+	var optionDiv = element.parentNode;
+	optionDiv.insertBefore(newOption, optionDiv.getElementsByClassName("add-option")[0]);
 }
 
 function check(element) {
+	var questionElement = element.parentNode;
 	if (element.value == "radio" || element.value == "checkbox") {
-		element.parentElement.querySelector(".options").removeAttribute(
-				"disabled");
-		element.parentElement.querySelector(".options").removeAttribute(
-				"hidden");
+		if (!questionElement.getElementsByClassName("options-div")[0]) {
+			var newOptionsDiv = document.createElement("div");
+			newOptionsDiv.innerHTML = "<button class='add-option' type='button' onclick='appendNewOption(this)'>Add new Option</button>";
+			newOptionsDiv.setAttribute("class","options-div")
+			questionElement.insertBefore(newOptionsDiv, questionElement.getElementsByClassName("break")[0]);
+		}
 	} else {
-		element.parentElement.querySelector(".options").setAttribute(
-				"disabled", true);
-		element.parentElement.querySelector(".options").setAttribute("hidden",
-				true);
+		if (questionElement.getElementsByClassName("options-div")[0]) {
+			var optionsDiv = questionElement.getElementsByClassName("options-div")[0];
+			optionsDiv.parentNode.removeChild(optionsDiv);	
+		}
 	}
+}
+
+function deletePreviousQuestion() {
+	questionNo--;
+	var questionToBedeleted = document.getElementById("question-" + questionNo);
+	questionToBedeleted.parentNode.removeChild(questionToBedeleted);
+}
+
+function deleteParentOption(element) {
+	var questionToBedeleted = element.parentNode;
+	questionToBedeleted.parentNode.removeChild(questionToBedeleted);
 }
 
 window.onload = function() {

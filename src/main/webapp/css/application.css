@@ -15,7 +15,7 @@ body, html {
 	padding: 8px;
 }
 
-.error-container, .status-container{
+.error-container, .status-container, #header-container, #questions-container{
 	overflow-x: auto;
 	background-color: #2F4454;
 	width: 60%;

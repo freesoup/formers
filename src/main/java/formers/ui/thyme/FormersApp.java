@@ -40,6 +40,7 @@ public class FormersApp {
         this.controllersByURL.put("/formresult", new FormResultController());
         this.controllersByURL.put("/mainadmin", new AdminDashboardController());
         this.controllersByURL.put("/login", new LoginController());
+        this.controllersByURL.put("/respondform", new UserFormSubmittedController());
 
     }
 

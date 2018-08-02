@@ -37,7 +37,10 @@ public class DatabaseImpl implements Database {
         setting.setSchema("formers");
 
         KeyValueAccess kva = new CassandraAccessDatastax(setting);
-
+        if (iD == null) {
+            throw new DatabaseException(
+                    "Error retrieving form of form ID " + iD + ". Check to ensure that form ID is correct.");
+        }
         FormFormatDto ffDto = kva.getSingle(iD, FormFormatDto.class);
 
         if (ffDto == null) {

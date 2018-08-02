@@ -1,12 +1,13 @@
 package formers.core.authentication;
 
 import formers.core.database.Database;
-import formers.core.database.DatabaseImpl;
+import formers.core.exception.DatabaseException;
+import formers.database.impl.DatabaseImpl;
 
 public class AuthenticatorImpl implements Authenticator {
 
     @Override
-    public boolean authenticate(String user, String password) {
+    public boolean authenticate(String user, String password) throws DatabaseException {
         Database db = new DatabaseImpl();
 
         String incomingHashPass = String.valueOf(password.hashCode());

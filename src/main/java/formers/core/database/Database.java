@@ -3,6 +3,7 @@ package formers.core.database;
 import java.util.List;
 
 import formers.core.authentication.Authorization;
+import formers.core.exception.DatabaseException;
 import formers.core.form.utils.FormFormat;
 import formers.core.form.utils.FormResponse;
 
@@ -19,9 +20,11 @@ public interface Database {
 
     public FormResponse getFormResult(String user, String formID);
 
-    public String getPass(String user);
+    public String getPass(String user) throws DatabaseException;
 
     public boolean addNewAccount(String user, String hashedPass);
 
     public Authorization getAuthority(String user);
+
+    public void deleteAllTracesOf(String formIdToBeDeleted) throws DatabaseException;
 }

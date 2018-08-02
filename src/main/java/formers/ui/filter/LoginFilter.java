@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import formers.core.authentication.Authorization;
+
 /**
  * Servlet Filter implementation class LoginFilter
  */
@@ -42,7 +44,9 @@ public class LoginFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse)res;
         HttpSession session = request.getSession(false);
 
-        boolean authenticated = (session != null) && (session.getAttribute("user") != null);
+        boolean authenticated = (session != null)
+                && (session.getAttribute("user") != null)
+                && (session.getAttribute("authority") == Authorization.ADMIN);
 
         String currentURI = request.getServletPath();
         String currentQuery = request.getQueryString();
@@ -51,10 +55,10 @@ public class LoginFilter implements Filter {
         }
         if (currentURI == null
                 || currentURI.equals("/viewform")
+                || currentURI.equals("/respondform")
                 || currentURI.startsWith("/css")
                 || currentURI.startsWith("/js")
                 || currentURI.startsWith("/verify")
-                || currentURI.startsWith("/respondform")
                 || currentURI.startsWith("/login")
                 || currentURI.startsWith("/newuser")
                 || currentURI.startsWith("/accountcreated")

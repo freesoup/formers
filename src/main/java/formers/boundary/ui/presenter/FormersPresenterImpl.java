@@ -3,18 +3,16 @@ package formers.boundary.ui.presenter;
 import java.util.Date;
 import java.util.List;
 
+import formers.core.authentication.Authorization;
+import formers.core.exception.InsufficientAuthorityException;
 import formers.core.form.utils.FormFormat;
 import formers.core.form.utils.FormResponse;
-import formers.core.form.utils.FormType;
-import formers.core.form.utils.Option;
-import formers.core.form.utils.Question;
-import formers.core.users.AdminCore;
-import formers.core.users.UserCore;
+import formers.core.users.Player;
 
 public class FormersPresenterImpl implements FormersPresenter {
     public String viewForm(String requestID) {
-        UserCore user = new UserCore();
-        FormFormat newForm = user.viewForm(requestID);
+        Player player = new Player();
+        FormFormat newForm = player.viewForm(requestID);
 
         FormHTMLParser parser = new FormHTMLParserImpl();
         String form = parser.parseFormFormatToHTML(newForm);
@@ -31,18 +29,18 @@ public class FormersPresenterImpl implements FormersPresenter {
     }
 
     @Override
-    public String viewResults(String formID) {
+    public String viewResults(String formID, Authorization authority) throws InsufficientAuthorityException {
         // TODO:adasd
-        AdminCore admin = new AdminCore();
-        List<FormResponse> listResults = admin.viewResultsOfAForm(formID);
+        Player admin = new Player();
+        List<FormResponse> listResults = admin.viewResultsOfAForm(formID, authority);
         return null;
     }
 
     @Override
     public Date getExpiry(String requestID) {
-        UserCore user = new UserCore();
+        Player user = new Player();
         FormFormat form = user.viewForm(requestID);
-        
+
         return form.getDateExpiryinDate();
     }
 }

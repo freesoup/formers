@@ -10,7 +10,16 @@ body, html {
 	overflow-x: auto;
 	background-color: #2F4454;
 	width: 80%;
-	margin: 2% 10% 0 10%;
+	margin: 2% 10% 2% 10%;
+	border-radius:5px;
+	padding: 8px;
+}
+
+.error-container {
+	overflow-x: auto;
+	background-color: #2F4454;
+	width: 60%;
+	margin: 2% 20% 2% 20%;
 	border-radius:5px;
 	padding: 8px;
 }

@@ -1,4 +1,4 @@
-package formers.core.database.dto;
+package formers.database.dto;
 
 import com.worksap.company.dto.annotation.Entity;
 import com.worksap.company.dto.annotation.Key;

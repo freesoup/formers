@@ -8,9 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import formers.boundary.ui.submitter.AccountService;
-import formers.boundary.ui.submitter.AccountServiceImpl;
+import formers.boundary.authentication.submitter.AccountService;
+import formers.boundary.authentication.submitter.AccountServiceImpl;
+import formers.boundary.exception.FormersException;
 import formers.core.authentication.Authorization;
+import formers.core.exception.DatabaseException;
 
 /**
  * Servlet implementation class VerifyServlet
@@ -45,11 +47,18 @@ public class VerifyServlet extends HttpServlet {
         String target = request.getParameter("target");
 
         AccountService acservice = new AccountServiceImpl();
-        boolean success = acservice.verifyLogIn(user, password);
-        Authorization authority = acservice.getAuthority(user);
+        boolean success;
+        Authorization authority;
+
+        try {
+            success = acservice.verifyLogIn(user, password);
+            authority = acservice.getAuthority(user);
+        } catch (DatabaseException e) {
+            throw new FormersException(e.getMessage());
+        }
 
         if (target == null) {
-            // Will only be null when User accesses a page that is ignored by the filter.
+            // Will only be null when User accesses this page directly. Skipping the filter since this class has no filter.
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath()));
         }
 
@@ -57,7 +66,6 @@ public class VerifyServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
             session.setAttribute("authority", authority);
-            System.out.println(request.getContextPath() + target);
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + target));
         } else {
             request.setAttribute("error", "Incorrect Username or Password!");

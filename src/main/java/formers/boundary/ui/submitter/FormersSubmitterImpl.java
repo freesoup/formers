@@ -3,21 +3,23 @@ package formers.boundary.ui.submitter;
 import java.util.List;
 import java.util.Map;
 
+import formers.core.authentication.Authorization;
+import formers.core.exception.InsufficientAuthorityException;
 import formers.core.form.utils.FormFormat;
 import formers.core.form.utils.FormResponse;
 import formers.core.form.utils.FormType;
 import formers.core.form.utils.Option;
 import formers.core.form.utils.Question;
 import formers.core.form.utils.Response;
-import formers.core.users.AdminCore;
-import formers.core.users.UserCore;
+import formers.core.users.Player;
 
 public class FormersSubmitterImpl implements FormersSubmitter {
 
     @Override
-    public FormFormat submitNewForm(Map<String, String[]> map, String userName) {
-        AdminCore admin = new AdminCore();
-        FormFormat newForm = admin.initForm(userName);
+    public FormFormat submitNewForm(Map<String, String[]> map, String userName, Authorization authority)
+            throws InsufficientAuthorityException {
+        Player player = new Player();
+        FormFormat newForm = player.initForm(userName, authority);
 
         String[] questions = map.get("question");
         String[] questionsType = map.get("type");
@@ -68,18 +70,19 @@ public class FormersSubmitterImpl implements FormersSubmitter {
             newForm.addQuestion(question);
         }
 
-        admin.submitFormFormat(newForm);
+        player.submitFormFormat(newForm, authority);
 
         return newForm;
     }
 
     @Override
-    public FormResponse submitNewResponse(Map<String, String[]> map, String formID, String userName) {
-        UserCore user = new UserCore();
-        FormResponse responses = user.initFormResponse(userName);
+    public FormResponse submitNewResponse(Map<String, String[]> map, String formID, String userName,
+            Authorization authority) throws InsufficientAuthorityException {
+        Player player = new Player();
+        FormResponse responses = player.initFormResponse(userName, authority);
         responses.setFormID(formID);
 
-        FormFormat correspondingFormat = user.viewForm(formID);
+        FormFormat correspondingFormat = player.viewForm(formID);
 
         List<Question> questions = correspondingFormat.getQuestions();
 
@@ -109,7 +112,7 @@ public class FormersSubmitterImpl implements FormersSubmitter {
             responses.addResponse(response);
         }
 
-        user.submitForm(responses);
+        player.submitForm(responses, authority);
 
         return responses;
     }

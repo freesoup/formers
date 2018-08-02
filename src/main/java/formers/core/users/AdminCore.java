@@ -3,10 +3,10 @@ package formers.core.users;
 import java.util.List;
 
 import formers.core.database.Database;
-import formers.core.database.DatabaseImpl;
 import formers.core.form.utils.FormFormat;
 import formers.core.form.utils.FormID;
 import formers.core.form.utils.FormResponse;
+import formers.database.impl.DatabaseImpl;
 
 /**
  * Provides access to administrative user functionalities.

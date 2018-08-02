@@ -10,20 +10,29 @@ import javax.servlet.http.HttpServletResponse;
 import org.thymeleaf.ITemplateEngine;
 import org.thymeleaf.context.WebContext;
 
+import formers.boundary.exception.FormersException;
+import formers.core.authentication.Authorization;
+import formers.core.exception.InsufficientAuthorityException;
 import formers.core.form.utils.FormFormat;
 import formers.core.form.utils.FormResponse;
-import formers.core.users.AdminCore;
+import formers.core.users.Player;
 
 public class FormResultController implements IFormersController {
 
     @Override
     public void process(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext,
-            ITemplateEngine templateEngine) {
+            ITemplateEngine templateEngine) throws FormersException {
 
         String requestID = request.getParameter("requestID");
-        AdminCore admin = new AdminCore();
-        List<FormResponse> listResponse = admin.viewResultsOfAForm(requestID);
-        FormFormat format = admin.viewForm(requestID);
+        Authorization authority = (Authorization)request.getSession().getAttribute("authority");
+        Player player = new Player();
+        List<FormResponse> listResponse;
+        try {
+            listResponse = player.viewResultsOfAForm(requestID, authority);
+        } catch (InsufficientAuthorityException e) {
+            throw new FormersException(e.getMessage());
+        }
+        FormFormat format = player.viewForm(requestID);
 
         WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
 

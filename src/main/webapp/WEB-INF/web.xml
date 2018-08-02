@@ -4,20 +4,30 @@
 
 <web-app>
 	<display-name>Formers Web Application</display-name>
-	
-	
+
+
 	<filter>
 		<filter-name>LoginFilter</filter-name>
 		<display-name>LoginFilter</display-name>
 		<description></description>
 		<filter-class>formers.ui.filter.LoginFilter</filter-class>
 	</filter>
+	<filter>
+		<filter-name>NewFormFilter</filter-name>
+		<display-name>NewFormFilter</display-name>
+		<description></description>
+		<filter-class>formers.ui.filter.NewFormFilter</filter-class>
+	</filter>
 	<filter-mapping>
 		<filter-name>LoginFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
-	
+	<filter-mapping>
+		<filter-name>NewFormFilter</filter-name>
+		<url-pattern>/viewform</url-pattern>
+	</filter-mapping>
+
+
 	<servlet>
 		<servlet-name>PrinterServlet</servlet-name>
 		<servlet-class>formers.ui.servlet.Printer</servlet-class>
@@ -76,6 +86,18 @@
 		<description></description>
 		<servlet-class>formers.ui.servlet.LoginServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>LogoutServlet</servlet-name>
+		<display-name>LogoutServlet</display-name>
+		<description></description>
+		<servlet-class>formers.ui.servlet.LogoutServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>AdminDeleteFormServlet</servlet-name>
+		<display-name>AdminDeleteFormServlet</display-name>
+		<description></description>
+		<servlet-class>formers.ui.servlet.AdminDeleteFormServlet</servlet-class>
+	</servlet>
 
 
 	<servlet-mapping>
@@ -122,9 +144,22 @@
 		<servlet-name>LoginServlet</servlet-name>
 		<url-pattern>/login</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>LogoutServlet</servlet-name>
+		<url-pattern>/logout</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AdminDeleteFormServlet</servlet-name>
+		<url-pattern>/deleteform</url-pattern>
+	</servlet-mapping>
 	
-	
+
 	<welcome-file-list>
 		<welcome-file>redirect.jsp</welcome-file>
 	</welcome-file-list>
+
+	<error-page>
+		<exception-type>formers.boundary.exception.FormersException</exception-type>
+		<location>/error.jsp</location>
+	</error-page>
 </web-app>

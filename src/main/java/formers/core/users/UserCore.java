@@ -1,9 +1,9 @@
 package formers.core.users;
 
 import formers.core.database.Database;
-import formers.core.database.DatabaseImpl;
 import formers.core.form.utils.FormFormat;
 import formers.core.form.utils.FormResponse;
+import formers.database.impl.DatabaseImpl;
 
 /**
  * Provides access to normal user functionalities.

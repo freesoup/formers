@@ -6,20 +6,18 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import formers.boundary.authentication.submitter.AccountService;
-import formers.boundary.authentication.submitter.AccountServiceImpl;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class AccountCreationServlet
+ * Servlet implementation class LogoutServlet
  */
-public class AccountCreationServlet extends HttpServlet {
+public class LogoutServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AccountCreationServlet() {
+    public LogoutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,7 +28,9 @@ public class AccountCreationServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // TODO Auto-generated method stub
-        response.getWriter().append("Served at: ").append(request.getContextPath());
+        HttpSession session = request.getSession();
+        session.invalidate();
+        response.sendRedirect(response.encodeRedirectURL(request.getContextPath()));
     }
 
     /**
@@ -39,10 +39,7 @@ public class AccountCreationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // TODO Auto-generated method stub
-        AccountService acservice = new AccountServiceImpl();
-        boolean success = acservice.createAccount(request.getParameter("newuser"), request.getParameter("newpassword"));
-
-        response.sendRedirect(response.encodeRedirectURL(request.getContextPath()));
+        doGet(request, response);
     }
 
 }

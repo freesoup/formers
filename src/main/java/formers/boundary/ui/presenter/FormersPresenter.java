@@ -2,6 +2,8 @@ package formers.boundary.ui.presenter;
 
 import java.util.Date;
 
+import formers.core.authentication.Authorization;
+import formers.core.exception.InsufficientAuthorityException;
 import formers.core.form.utils.FormFormat;
 
 public interface FormersPresenter {
@@ -9,7 +11,7 @@ public interface FormersPresenter {
 
     String viewForm(FormFormat submittedForm);
 
-    String viewResults(String formID);
+    String viewResults(String formID, Authorization authority) throws InsufficientAuthorityException;
 
     Date getExpiry(String requestID);
 }

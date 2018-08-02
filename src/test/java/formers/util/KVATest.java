@@ -6,7 +6,7 @@ import com.worksap.company.access.KeyValueAccess;
 import com.worksap.company.access.cassandra.CassandraAccessDatastax;
 import com.worksap.company.access.cassandra.setting.CassandraSetting;
 
-import formers.core.database.dto.FormFormatDto;
+import formers.database.dto.FormFormatDto;
 
 public class KVATest {
     @Test

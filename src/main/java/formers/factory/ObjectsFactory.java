@@ -3,8 +3,8 @@ package formers.factory;
 import formers.boundary.ui.presenter.FormersPresenter;
 import formers.boundary.ui.presenter.FormersPresenterImpl;
 import formers.core.database.Database;
-import formers.core.database.DatabaseImpl;
 import formers.core.users.AdminCore;
+import formers.database.impl.DatabaseImpl;
 
 public class ObjectsFactory {
 

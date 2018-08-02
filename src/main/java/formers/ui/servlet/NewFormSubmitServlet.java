@@ -8,14 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import formers.boundary.exception.FormersException;
 import formers.boundary.ui.presenter.FormersPresenter;
 import formers.boundary.ui.presenter.FormersPresenterImpl;
 import formers.boundary.ui.submitter.FormersSubmitter;
 import formers.boundary.ui.submitter.FormersSubmitterImpl;
+import formers.core.authentication.Authorization;
+import formers.core.exception.InsufficientAuthorityException;
 import formers.core.form.utils.FormFormat;
 
 /**
- * Servlet implementation class FormSubmitServlet
+ * Servlet implementation class FormSubmitServlet Admin's view after submitting a form format.
  */
 public class NewFormSubmitServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -37,8 +40,14 @@ public class NewFormSubmitServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         String user = session.getAttribute("user").toString();
+        Authorization authority = (Authorization)session.getAttribute("authority");
 
-        FormFormat submittedForm = submitterInstance.submitNewForm(request.getParameterMap(), user);
+        FormFormat submittedForm;
+        try {
+            submittedForm = submitterInstance.submitNewForm(request.getParameterMap(), user, authority);
+        } catch (InsufficientAuthorityException e) {
+            throw new FormersException(e.getMessage());
+        }
         String formID = submittedForm.getID();
 
         String css = "<link rel=\"stylesheet\"\r\n"

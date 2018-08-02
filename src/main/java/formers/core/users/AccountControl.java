@@ -1,7 +1,7 @@
 package formers.core.users;
 
 import formers.core.database.Database;
-import formers.core.database.DatabaseImpl;
+import formers.database.impl.DatabaseImpl;
 
 public class AccountControl {
     public boolean createAccount(String user, String password) {

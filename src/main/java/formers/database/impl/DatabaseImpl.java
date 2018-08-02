@@ -1,4 +1,4 @@
-package formers.core.database;
+package formers.database.impl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,17 +7,20 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.worksap.company.access.KeyValueAccess;
 import com.worksap.company.access.cassandra.CassandraAccessDatastax;
+import com.worksap.company.access.cassandra.exception.CassandraNoHostAvailableException;
 import com.worksap.company.access.cassandra.setting.CassandraSetting;
 import com.worksap.company.dto.key.SearchCondition;
 import com.worksap.company.dto.key.SearchConditions;
 
 import formers.core.authentication.Authorization;
-import formers.core.database.dto.AccountDto;
-import formers.core.database.dto.FormFormat2Dto;
-import formers.core.database.dto.FormFormatDto;
-import formers.core.database.dto.FormResponseDto;
+import formers.core.database.Database;
+import formers.core.exception.DatabaseException;
 import formers.core.form.utils.FormFormat;
 import formers.core.form.utils.FormResponse;
+import formers.database.dto.AccountDto;
+import formers.database.dto.FormFormat2Dto;
+import formers.database.dto.FormFormatDto;
+import formers.database.dto.FormResponseDto;
 
 public class DatabaseImpl implements Database {
 
@@ -146,7 +149,7 @@ public class DatabaseImpl implements Database {
     }
 
     @Override
-    public String getPass(String user) {
+    public String getPass(String user) throws DatabaseException {
         CassandraSetting setting = new CassandraSetting();
         setting.setHost("127.0.0.1");
         setting.setNativeTransportPort(9042);
@@ -154,13 +157,17 @@ public class DatabaseImpl implements Database {
         setting.setSchema("formers");
         KeyValueAccess kva = new CassandraAccessDatastax(setting);
 
-        AccountDto acdto = kva.getSingle(user, AccountDto.class);
+        try {
+            AccountDto acdto = kva.getSingle(user, AccountDto.class);
 
-        if (acdto == null) {
-            return null;
+            if (acdto == null) {
+                return null;
+            }
+
+            return acdto.getHashedPass();
+        } catch (CassandraNoHostAvailableException cnhae) {
+            throw new DatabaseException("Out database is offline.");
         }
-
-        return acdto.getHashedPass();
     }
 
     @Override
@@ -197,10 +204,21 @@ public class DatabaseImpl implements Database {
         kva.createTable(AccountDto.class);
         AccountDto acdtoCheck = kva.getSingle(user, AccountDto.class);
 
-        if (acdtoCheck != null) {
+        if (acdtoCheck == null) {
             return Authorization.STRANGER;
         } else {
             return acdtoCheck.getAuthority();
         }
+    }
+
+    @Override
+    public void deleteAllTracesOf(String formIdToBeDeleted) throws DatabaseException {
+        CassandraSetting setting = new CassandraSetting();
+        setting.setHost("127.0.0.1");
+        setting.setNativeTransportPort(9042);
+        setting.setTenantID("admin");
+        setting.setSchema("formers");
+        KeyValueAccess kva = new CassandraAccessDatastax(setting);
+
     }
 }

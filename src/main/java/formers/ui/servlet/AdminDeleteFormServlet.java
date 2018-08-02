@@ -47,6 +47,7 @@ public class AdminDeleteFormServlet extends HttpServlet {
         } catch (DatabaseException | InsufficientAuthorityException e) {
             throw new FormersException(e.getMessage());
         }
+        response.sendRedirect(response.encodeRedirectURL("mainadmin"));
     }
 
     /**

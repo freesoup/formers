@@ -18,9 +18,11 @@ public class LoginController implements IFormersController {
 
         String target = (String)request.getAttribute("target");
         String error = (String)request.getAttribute("error");
+        String message = (String)request.getAttribute("message");
 
         ctx.setVariable("target", target);
         ctx.setVariable("error", error);
+        ctx.setVariable("message", message);
 
         try {
             templateEngine.process("login", ctx, response.getWriter());

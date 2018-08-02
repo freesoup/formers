@@ -16,7 +16,7 @@ public interface Database {
 
     public List<FormResponse> getAllFormResponse(String formID);
 
-    public FormFormat getForm(String iD);
+    public FormFormat getForm(String iD) throws DatabaseException;
 
     public FormResponse getFormResult(String user, String formID);
 
@@ -26,5 +26,5 @@ public interface Database {
 
     public Authorization getAuthority(String user);
 
-    public void deleteAllTracesOf(String formIdToBeDeleted) throws DatabaseException;
+    public void deleteAllTracesOf(String formIdToBeDeleted, String user) throws DatabaseException;
 }

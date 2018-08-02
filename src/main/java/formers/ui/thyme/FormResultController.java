@@ -12,6 +12,7 @@ import org.thymeleaf.context.WebContext;
 
 import formers.boundary.exception.FormersException;
 import formers.core.authentication.Authorization;
+import formers.core.exception.DatabaseException;
 import formers.core.exception.InsufficientAuthorityException;
 import formers.core.form.utils.FormFormat;
 import formers.core.form.utils.FormResponse;
@@ -32,7 +33,12 @@ public class FormResultController implements IFormersController {
         } catch (InsufficientAuthorityException e) {
             throw new FormersException(e.getMessage());
         }
-        FormFormat format = player.viewForm(requestID);
+        FormFormat format;
+        try {
+            format = player.viewForm(requestID);
+        } catch (DatabaseException e1) {
+            throw new FormersException(e1.getMessage());
+        }
 
         WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
 

@@ -12,6 +12,7 @@ import formers.boundary.exception.FormersException;
 import formers.boundary.ui.submitter.FormersSubmitter;
 import formers.boundary.ui.submitter.FormersSubmitterImpl;
 import formers.core.authentication.Authorization;
+import formers.core.exception.DatabaseException;
 import formers.core.exception.InsufficientAuthorityException;
 import formers.core.form.utils.FormResponse;
 
@@ -55,7 +56,11 @@ public class UserFormSubmittedServlet extends HttpServlet {
         FormersSubmitter submitterInstance = new FormersSubmitterImpl();
         FormResponse submittedForm;
         try {
-            submittedForm = submitterInstance.submitNewResponse(request.getParameterMap(), formID, user, authority);
+            try {
+                submittedForm = submitterInstance.submitNewResponse(request.getParameterMap(), formID, user, authority);
+            } catch (DatabaseException e) {
+                throw new FormersException(e.getMessage());
+            }
         } catch (InsufficientAuthorityException e) {
             // TODO Auto-generated catch block
             throw new FormersException(e.getMessage());

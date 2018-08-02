@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.datastax.driver.core.exceptions.CodecNotFoundException;
 import com.google.gson.Gson;
 import com.worksap.company.access.KeyValueAccess;
 import com.worksap.company.access.cassandra.CassandraAccessDatastax;
@@ -11,6 +12,8 @@ import com.worksap.company.access.cassandra.exception.CassandraNoHostAvailableEx
 import com.worksap.company.access.cassandra.setting.CassandraSetting;
 import com.worksap.company.dto.key.SearchCondition;
 import com.worksap.company.dto.key.SearchConditions;
+import com.worksap.company.dto.operation.Delete;
+import com.worksap.company.dto.operation.Delete.Builder;
 
 import formers.core.authentication.Authorization;
 import formers.core.database.Database;
@@ -24,7 +27,7 @@ import formers.database.dto.FormResponseDto;
 
 public class DatabaseImpl implements Database {
 
-    public FormFormat getForm(String iD) {
+    public FormFormat getForm(String iD) throws DatabaseException {
         Gson gson = new Gson();
 
         CassandraSetting setting = new CassandraSetting();
@@ -36,6 +39,11 @@ public class DatabaseImpl implements Database {
         KeyValueAccess kva = new CassandraAccessDatastax(setting);
 
         FormFormatDto ffDto = kva.getSingle(iD, FormFormatDto.class);
+
+        if (ffDto == null) {
+            throw new DatabaseException(
+                    "Error retrieving form of form ID " + iD + ". Check to ensure that form ID is correct.");
+        }
 
         String formJSON = ffDto.getFormFormat();
 
@@ -212,7 +220,7 @@ public class DatabaseImpl implements Database {
     }
 
     @Override
-    public void deleteAllTracesOf(String formIdToBeDeleted) throws DatabaseException {
+    public void deleteAllTracesOf(String formIdToBeDeleted, String user) throws DatabaseException {
         CassandraSetting setting = new CassandraSetting();
         setting.setHost("127.0.0.1");
         setting.setNativeTransportPort(9042);
@@ -220,5 +228,16 @@ public class DatabaseImpl implements Database {
         setting.setSchema("formers");
         KeyValueAccess kva = new CassandraAccessDatastax(setting);
 
+        try {
+            kva.deleteByKeySingle(formIdToBeDeleted, FormFormatDto.class);
+            kva.deleteByKeySingle(Arrays.asList(user, formIdToBeDeleted), FormFormat2Dto.class);
+
+            SearchCondition searchId = SearchCondition.eq("formId", formIdToBeDeleted);
+            Builder builder = new Builder(FormResponseDto.class, new SearchConditions(searchId));
+            Delete deleteOperation = builder.build();
+            kva.deleteByOperation(deleteOperation);
+        } catch (CodecNotFoundException cnfe) {
+            throw new DatabaseException("Error finding the form to delete.");
+        }
     }
 }

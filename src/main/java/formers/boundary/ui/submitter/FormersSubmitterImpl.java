@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import formers.core.authentication.Authorization;
+import formers.core.exception.DatabaseException;
 import formers.core.exception.InsufficientAuthorityException;
 import formers.core.form.utils.FormFormat;
 import formers.core.form.utils.FormResponse;
@@ -77,7 +78,7 @@ public class FormersSubmitterImpl implements FormersSubmitter {
 
     @Override
     public FormResponse submitNewResponse(Map<String, String[]> map, String formID, String userName,
-            Authorization authority) throws InsufficientAuthorityException {
+            Authorization authority) throws InsufficientAuthorityException, DatabaseException {
         Player player = new Player();
         FormResponse responses = player.initFormResponse(userName, authority);
         responses.setFormID(formID);

@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta charset="ISO-8859-1">
-
 <link href="https://fonts.googleapis.com/css?family=Lato"
 	rel="stylesheet">
 <link rel="stylesheet"
@@ -30,14 +31,23 @@
 		<h1 class='pagetitle'>Create your account</h1>
 		<div class='form-container newacc-form'>
 			<form id='signup-form' action='accountcreated' method='post'>
+				<% String error=(String)request.getAttribute("error");
+				if (error!=null) {
+					out.println("<p class='error'>" + error + "</p>");
+				}%>
 				<label for="username">Your Username</label> <br> <input
-					type="text" name="newuser" id="username" autocomplete="off" pattern=".{5,}" required
-					oninvalid="this.setCustomValidity('Your user username needs to be at least 5 characters long')" oninput="this.setCustomValidity('')"><br>
-				<label for="password"> Password </label> <br> <input
-					type="password" name="newpassword" id="password" autocomplete="off" pattern=".{5,}" required
-					oninvalid="this.setCustomValidity('Your user password needs to be at least 5 characters long')" oninput="this.setCustomValidity('')"><br>
+					type="text" name="newuser" id="username" autocomplete="off"
+					pattern=".{5,}" required
+					oninvalid="this.setCustomValidity('Your user username needs to be at least 5 characters long')"
+					oninput="this.setCustomValidity('')"><br> <label
+					for="password"> Password </label> <br> <input type="password"
+					name="newpassword" id="password" autocomplete="off" pattern=".{5,}"
+					required
+					oninvalid="this.setCustomValidity('Your user password needs to be at least 5 characters long')"
+					oninput="this.setCustomValidity('')"><br>
 				<div class='btn-container'>
-					<button type="submit" form="signup-form" value="Create new account">Create new account</button>
+					<button type="submit" form="signup-form" value="Create new account">Create
+						new account</button>
 				</div>
 			</form>
 		</div>

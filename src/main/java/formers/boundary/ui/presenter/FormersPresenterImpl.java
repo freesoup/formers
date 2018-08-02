@@ -4,13 +4,14 @@ import java.util.Date;
 import java.util.List;
 
 import formers.core.authentication.Authorization;
+import formers.core.exception.DatabaseException;
 import formers.core.exception.InsufficientAuthorityException;
 import formers.core.form.utils.FormFormat;
 import formers.core.form.utils.FormResponse;
 import formers.core.users.Player;
 
 public class FormersPresenterImpl implements FormersPresenter {
-    public String viewForm(String requestID) {
+    public String viewForm(String requestID) throws DatabaseException {
         Player player = new Player();
         FormFormat newForm = player.viewForm(requestID);
 
@@ -37,7 +38,7 @@ public class FormersPresenterImpl implements FormersPresenter {
     }
 
     @Override
-    public Date getExpiry(String requestID) {
+    public Date getExpiry(String requestID) throws DatabaseException {
         Player user = new Player();
         FormFormat form = user.viewForm(requestID);
 

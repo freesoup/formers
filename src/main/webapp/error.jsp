@@ -35,7 +35,7 @@
 				%>
 			</p>
 			<p>Please click the link below to return to the login page</p>
-			<a href='login'><button>Return to front page</button></a>
+			<a href='mainadmin'><button>Return to front page</button></a>
 		</div>
 	</div>
 </body>

@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import formers.boundary.exception.FormersException;
 import formers.boundary.ui.presenter.FormersPresenter;
 import formers.boundary.ui.presenter.FormersPresenterImpl;
+import formers.core.exception.DatabaseException;
 
 /**
  * Servlet implementation class FormViewServlet Displays the form for users to submit.
@@ -34,9 +36,14 @@ public class UserFormFormatViewServlet extends HttpServlet {
             throws ServletException, IOException {
         FormersPresenter presenter = new FormersPresenterImpl();
         String requestID = request.getParameter("requestID");
-        String htmlCodes = presenter.viewForm(requestID);
-        Date expiry = presenter.getExpiry(requestID);
-
+        String htmlCodes;
+        Date expiry;
+        try {
+            htmlCodes = presenter.viewForm(requestID);
+            expiry = presenter.getExpiry(requestID);
+        } catch (DatabaseException de) {
+            throw new FormersException(de.getMessage());
+        }
         String css = "<link rel=\"stylesheet\"\r\n"
                 +
                 "    href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css\"\r\n"

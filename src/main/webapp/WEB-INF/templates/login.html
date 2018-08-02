@@ -37,6 +37,7 @@
 			<div id="login-form">
 				<form action="verify" method="post" id="login">
 					<p class='error' th:if="${error} != null" th:text="${error}"></p>
+					<p class='message' th:if="${message} != null" th:text="${message}"></p>
 					<label for="username"> Username </label> <br> <input
 						type="text" name="user" id="username" autocomplete="off"><br>
 					<label for="password"> Password </label> <br> <input

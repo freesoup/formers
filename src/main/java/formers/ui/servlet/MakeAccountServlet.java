@@ -27,7 +27,7 @@ public class MakeAccountServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher view = request.getRequestDispatcher("newuser.html");
+        RequestDispatcher view = request.getRequestDispatcher("newuser.jsp");
         // don't add your web-app name to the path
 
         view.forward(request, response);

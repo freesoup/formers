@@ -110,7 +110,7 @@ public class Player {
     }
 
     // User-admin specific functions
-    public FormFormat viewForm(String formID) {
+    public FormFormat viewForm(String formID) throws DatabaseException {
         Database db = new DatabaseImpl();
         FormFormat form = db.getForm(formID);
         return form;
@@ -120,7 +120,7 @@ public class Player {
             throws DatabaseException, InsufficientAuthorityException {
         if (authority == Authorization.ADMIN) {
             Database db = new DatabaseImpl();
-            db.deleteAllTracesOf(formIdToBeDeleted);
+            db.deleteAllTracesOf(formIdToBeDeleted, user);
         } else {
             throw new InsufficientAuthorityException("Please sign up to use this function");
         }

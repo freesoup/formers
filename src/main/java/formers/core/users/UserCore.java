@@ -1,7 +1,6 @@
 package formers.core.users;
 
 import formers.core.database.Database;
-import formers.core.form.utils.FormFormat;
 import formers.core.form.utils.FormResponse;
 import formers.database.impl.DatabaseImpl;
 
@@ -12,12 +11,6 @@ import formers.database.impl.DatabaseImpl;
  *
  */
 public class UserCore {
-    public FormFormat viewForm(String iD) {
-        DatabaseImpl db = new DatabaseImpl();
-        FormFormat form = db.getForm(iD);
-        return form;
-    }
-
     public boolean submitForm(FormResponse response) {
         Database db = new DatabaseImpl();
         db.submitResponse(response);

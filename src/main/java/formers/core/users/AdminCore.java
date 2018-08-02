@@ -38,12 +38,6 @@ public class AdminCore {
         return formatList;
     }
 
-    public FormFormat viewForm(String formID) {
-        Database db = new DatabaseImpl();
-        FormFormat form = db.getForm(formID);
-        return form;
-    }
-
     public FormResponse viewResult(String formID, String user) {
         Database db = new DatabaseImpl();
         FormResponse results = db.getFormResult(user, formID);

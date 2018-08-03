@@ -1,0 +1,74 @@
+body, html {
+	height: 100%;
+}
+
+.page-container {
+	height: 100%;
+	background-color: #1f2833;
+	color: #F0FFFF;
+}
+
+#login-container-left {
+	float: left;
+	width: 55%;
+	height: 100%;
+	padding: 10% 0 10% 15%;
+	overflow: auto;
+}
+
+.picture-container {
+	background-image: url("512x512.png");
+	background-repeat:no-repeat;
+	height: 100%;
+	-webkit-filter: invert(95%);
+    filter: invert(95%);
+}
+
+#login-container-right {
+	float: right;
+	width: 45%;
+	height: 100%;
+	padding: 10% 0 10% 30px;
+	overflow: auto;
+}
+
+#username {
+	width: 200px;
+}
+
+#password {
+	width: 200px;
+}
+
+#login-form {
+	background-color: #2F4454;
+	width: 80%;
+	padding: 6px 6px 6px 6px;
+	border-radius: 5px;
+}
+
+button {
+	display: block;
+	margin: 5px 0 5px 0;
+}
+
+.newacc-container {
+	text-align: center;
+	padding: 2% 10% 0 10%;
+}
+
+.newacc-form {
+	padding: 0 30% 0 30%;
+}
+
+#signup-form {
+	text-align: left;
+	background-color: #2F4454;
+	width: 100%;
+	padding: 6px 6px 6px 6px;
+	border-radius: 5px;
+}
+
+.error {
+	color: #EE4C7C;
+}

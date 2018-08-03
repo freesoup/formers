@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title th:text="|Form Result of ${format.ID}|">Form Result</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" media="all" 
+          href="css/application.css"/>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+	integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+	integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+	crossorigin="anonymous"></script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+	<div id="page-container">
+	<div id="form-description-container"> 
+	<h1 th:text="|Results for ${format.formTitle}|">Results</h1>
+	<p th:text="|Form ID: ${format.ID}|">Form ID:</p>
+	<p th:text="|Period of form availability: ${format.getDateCreatedinString()} to ${format.getDateExpiryinString()}|">Period of form availability: </p>
+	<p th:text="|Number of responses: ${#lists.size(resultlist)}|"></p>
+	</div>
+	<table id="userTable" border="1">
+		<tr th:object=${format}>
+			<th>Response</th>
+			<th>Recipient</th>
+			<th>Date of Completion</th>
+			<th th:each="question :*{questions}" th:text="${question.question}"></th>
+		</tr>
+		<tr th:object=${resultlist} th:each="result :${resultlist}">
+			<!-- resultStat is the defalt variable that contains iteration status of result -->
+			<td th:text="${resultStat.count}"></td>
+			<td th:text="${result.recipient}"></td>
+			<td th:text="${result.getDateOfSubmissionInString()}"></td>
+			<td th:each="response :${result.responses}"
+				th:text="${response.answers}">asd</td>
+		</tr>
+	</table>
+	</div>
+
+</body>
+
+</html>

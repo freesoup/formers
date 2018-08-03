@@ -39,4 +39,25 @@ public class PlayerTest {
         verify(adminMock).submitFormFormat(eq(formMock));
     }
 
+    @Test(expected = InsufficientAuthorityException.class)
+    public void submitFormFormat_isStranger_InsufficientAuthority() throws InsufficientAuthorityException {
+        UserCore userMock = mock(UserCore.class);
+        AdminCore adminMock = mock(AdminCore.class);
+        FormFormat formMock = mock(FormFormat.class);
+        Player player = new Player(adminMock, userMock);
+
+        player.submitFormFormat(formMock, Authorization.STRANGER);
+    }
+
+    @Test
+    public void viewAllForm_Admin_Success() throws InsufficientAuthorityException {
+        UserCore userMock = mock(UserCore.class);
+        AdminCore adminMock = mock(AdminCore.class);
+        Player player = new Player(adminMock, userMock);
+
+        player.viewAllForm("usertest", Authorization.ADMIN);
+
+        verify(adminMock).viewAllForm(eq("usertest"));
+    }
+
 }

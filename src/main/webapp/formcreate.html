@@ -40,26 +40,26 @@
 				<input type="date" name="expirydate" id="expirydate" onchange="setMinMax()" required><br>
 			</div>
 			
+			<div id='content-container'>
 			<div id='questions-container'>
 				<div id='question-0'>
-				
 					<h2>Question 1</h2>
-					<p>Question</p>
+					<label>Question</label><br>
 					<input type="text" name="question" required><br>
-					<p>Type</p>
+					<label>Type</label><br>
 					<select name="type" onChange="check(this)">
 						<option value="text">Text</option>
 						<option value="radio">Radio</option>
 						<option value="checkbox">Checkbox</option>
 						<option value="textarea">TextArea</option>
 					</select>
-					
-					<div class='options' hidden disabled>
-						<button type="button" onclick="appendNewOption(this)">Add new Option</button>
-					</div>
 				</div>
 				
-				<button type="button" onclick="appendNewQuestion()">Add new Question</button>
+				<hr class="break">
+
+			</div>
+				<button class="float-right inline" type="button" onclick="deletePreviousQuestion()">Erase Last Question</button>
+				<button class="inline" type="button" onclick="appendNewQuestion()">Add New Question</button>
 				<button type="submit" form="form">Submit form</button>
 			</div>
 		</form>

@@ -7,6 +7,7 @@ import formers.core.authentication.Authorization;
 import formers.core.exception.DatabaseException;
 import formers.core.exception.InsufficientAuthorityException;
 import formers.core.form.utils.FormFormat;
+import formers.core.form.utils.FormID;
 import formers.core.form.utils.FormResponse;
 import formers.core.form.utils.FormType;
 import formers.core.form.utils.Option;
@@ -24,7 +25,6 @@ public class FormersSubmitterImpl implements FormersSubmitter {
 
         String[] questions = map.get("question");
         String[] questionsType = map.get("type");
-        String[] questionsParamName = map.get("name");
         newForm.addTitle(map.get("title")[0]);
         newForm.addPreamble(map.get("preamble")[0]);
 
@@ -40,11 +40,11 @@ public class FormersSubmitterImpl implements FormersSubmitter {
             Question question;
             switch (questionsType[i]) {
             case "text":
-                question = new Question(questions[i], FormType.TEXT, questionsParamName[i]);
+                question = new Question(questions[i], FormType.TEXT, FormID.generateFormID());
                 break;
 
             case "checkbox":
-                question = new Question(questions[i], FormType.CHECKBOX, questionsParamName[i]);
+                question = new Question(questions[i], FormType.CHECKBOX, FormID.generateFormID());
                 String[] optionFields = map.get("optionfield-" + i);
                 if (optionFields != null) {
                     for (int j = 0; j < optionFields.length; j++) {
@@ -53,7 +53,7 @@ public class FormersSubmitterImpl implements FormersSubmitter {
                 }
                 break;
             case "radio":
-                question = new Question(questions[i], FormType.RADIO, questionsParamName[i]);
+                question = new Question(questions[i], FormType.RADIO, FormID.generateFormID());
                 String[] optionFields1 = map.get("optionfield-" + i);
                 if (optionFields1 != null) {
                     for (int j = 0; j < optionFields1.length; j++) {
@@ -62,7 +62,7 @@ public class FormersSubmitterImpl implements FormersSubmitter {
                 }
                 break;
             case "textarea":
-                question = new Question(questions[i], FormType.TEXTAREA, questionsParamName[i]);
+                question = new Question(questions[i], FormType.TEXTAREA, FormID.generateFormID());
                 break;
             default:
                 return null;

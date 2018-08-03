@@ -1,5 +1,7 @@
 package formers.core.form.utils;
 
+import java.util.UUID;
+
 /**
  * Class to create a unique Form Identifier ID.
  * 
@@ -9,6 +11,6 @@ package formers.core.form.utils;
 public class FormID {
     public static String generateFormID() {
         // TODO:logic
-        return "abc123";
+        return UUID.randomUUID().toString();
     }
 }

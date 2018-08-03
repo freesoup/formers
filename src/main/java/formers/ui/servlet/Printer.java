@@ -8,11 +8,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Servlet implementation class Printer
  */
 public class Printer extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    final static Logger logger = LoggerFactory.getLogger(Printer.class);
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -27,21 +31,7 @@ public class Printer extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Set the response message MIME type (in Content-Type response header)
-        response.setContentType("text/html");
-        // Get an output Writer to write the response message over the network
-        PrintWriter out = response.getWriter();
-        // Write the response message (in an HTML page) to display "Hello, world!"
-        out.println("<!DOCTYPE html>");
-        out.println("<html><head>");
-        out.println("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
-        out.println("<title>Hello Servlet</title></head>");
-        out.println("<body><h1>Hello, World!</h1>");
-        out.println("<h1>You have just performed a GET REQUEST</h1>");
-        out.println("<p>Your IP address is " + request.getRemoteAddr() + "</p>");
-        out.println("<p>Your user agent is " + request.getHeader("user-agent") + "</p>");
-        out.println("</body></html>");
-        response.getWriter().append("Served at: ").append(request.getContextPath());
+        doPost(request, response);
     }
 
     /**
@@ -51,6 +41,8 @@ public class Printer extends HttpServlet {
             throws ServletException, IOException {
         String user = request.getParameter("user");
         String password = request.getParameter("password");
+        logger.info("Using this logger {}", logger.getClass());
+        logger.info("Logged in as " + user);
         // Set the response message MIME type (in Content-Type response header)
         response.setContentType("text/html");
 

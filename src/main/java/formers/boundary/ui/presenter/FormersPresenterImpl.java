@@ -1,48 +1,24 @@
 package formers.boundary.ui.presenter;
 
+import java.util.Date;
+import java.util.List;
+
+import formers.core.authentication.Authorization;
+import formers.core.exception.DatabaseException;
+import formers.core.exception.InsufficientAuthorityException;
 import formers.core.form.utils.FormFormat;
-import formers.core.form.utils.FormType;
-import formers.core.form.utils.Option;
-import formers.core.form.utils.Question;
-import formers.core.users.AdminCore;
+import formers.core.form.utils.FormResponse;
+import formers.core.users.Player;
 
 public class FormersPresenterImpl implements FormersPresenter {
-    public String viewForm() {
-        AdminCore admin = new AdminCore();
-        FormFormat newForm = generateSampleForm();
+    public String viewForm(String requestID) throws DatabaseException {
+        Player player = new Player();
+        FormFormat newForm = player.viewForm(requestID);
 
         FormHTMLParser parser = new FormHTMLParserImpl();
         String form = parser.parseFormFormatToHTML(newForm);
 
         return form;
-    }
-
-    private FormFormat generateSampleForm() {
-        FormFormat newForm = new FormFormat();
-        newForm.addTitle("The Best Grocery Store Great Survey");
-        newForm.addPreamble("Rate your experience");
-        newForm.addID("abc132");
-        newForm.addAdmin("tester1");
-
-        Question q1 = new Question("How would you rate it from 1~10", FormType.TEXT, "q1");
-        newForm.addQuestion(q1);
-
-        Question q2 = new Question("What did you enjoy the most during your time here", FormType.RADIO, "q2");
-        q2.addOption(new Option("The service was good", false));
-        q2.addOption(new Option("The people were polite", false));
-        q2.addOption(new Option("NA for me", true));
-        newForm.addQuestion(q2);
-
-        Question q3 = new Question("What product did u buy", FormType.CHECKBOX, "q3");
-        q3.addOption(new Option("Milk", false));
-        q3.addOption(new Option("Vegetables", false));
-        q3.addOption(new Option("Spinach", false));
-        q3.addOption(new Option("NA for me", true));
-        newForm.addQuestion(q3);
-
-        Question q4 = new Question("Do you have any other feedback", FormType.TEXTAREA, "q4");
-        newForm.addQuestion(q4);
-        return newForm;
     }
 
     @Override
@@ -51,5 +27,21 @@ public class FormersPresenterImpl implements FormersPresenter {
         String form = parser.parseFormFormatToHTML(submittedForm);
 
         return form;
+    }
+
+    @Override
+    public String viewResults(String formID, Authorization authority) throws InsufficientAuthorityException {
+        // TODO:adasd
+        Player admin = new Player();
+        List<FormResponse> listResults = admin.viewResultsOfAForm(formID, authority);
+        return null;
+    }
+
+    @Override
+    public Date getExpiry(String requestID) throws DatabaseException {
+        Player user = new Player();
+        FormFormat form = user.viewForm(requestID);
+
+        return form.getDateExpiryinDate();
     }
 }

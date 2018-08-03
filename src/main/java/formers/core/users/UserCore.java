@@ -1,11 +1,8 @@
 package formers.core.users;
 
-import java.util.List;
-
-import formers.core.form.utils.FormFormat;
+import formers.core.database.Database;
 import formers.core.form.utils.FormResponse;
-import formers.core.form.utils.Response;
-import formers.core.service.Database;
+import formers.database.impl.DatabaseImpl;
 
 /**
  * Provides access to normal user functionalities.
@@ -14,20 +11,14 @@ import formers.core.service.Database;
  *
  */
 public class UserCore {
-    public FormFormat viewForm(String ID) {
-        Database db = new Database();
-        FormFormat form = db.getForm(ID);
-        return form;
+    public boolean submitForm(FormResponse response) {
+        Database db = new DatabaseImpl();
+        db.submitResponse(response);
+        return true;
     }
 
-    public void submitForm(FormFormat form, List<Response> responseList) {
-        Database db = new Database();
-        FormResponse responses = new FormResponse(form);
-
-        for (Response answer : responseList) {
-            responses.addResponse(answer);
-        }
-
-        db.submitResponse(responses);
+    public FormResponse initFormResponse(String userName) {
+        FormResponse responses = new FormResponse(userName);
+        return responses;
     }
 }

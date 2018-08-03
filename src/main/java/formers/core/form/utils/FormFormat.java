@@ -22,8 +22,8 @@ public class FormFormat {
     private List<Question> questions;
 
     public FormFormat() {
-        this.dateCreated = new Date();
         this.questions = new ArrayList<Question>();
+        this.dateCreated = new Date();
     }
 
     public void addTitle(String info) {
@@ -46,8 +46,16 @@ public class FormFormat {
         this.dateCreated = date;
     }
 
+    public void setDateCreated(String htmlDate) {
+        this.dateCreated = DateParser.ParseHTMLStringToDate(htmlDate);
+    }
+
     public void setDateExpiry(Date date) {
         this.dateExpiry = date;
+    }
+
+    public void setDateExpiry(String htmlDate) {
+        this.dateExpiry = DateParser.ParseHTMLStringToDate(htmlDate);
     }
 
     public void addQuestion(Question field) {
@@ -64,5 +72,33 @@ public class FormFormat {
 
     public String getTitle() {
         return formTitle;
+    }
+
+    public String getFormTitle() {
+        return formTitle;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public Date getDateCreatedinDate() {
+        return dateCreated;
+    }
+
+    public Date getDateExpiryinDate() {
+        return dateExpiry;
+    }
+
+    public String getDateCreatedinString() {
+        return DateParser.ParseDateToHTMLString(dateCreated);
+    }
+
+    public String getDateExpiryinString() {
+        return DateParser.ParseDateToHTMLString(dateExpiry);
     }
 }

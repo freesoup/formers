@@ -2,7 +2,6 @@ package formers.core.users;
 
 import formers.core.database.Database;
 import formers.core.form.utils.FormResponse;
-import formers.database.impl.DatabaseImpl;
 
 /**
  * Provides access to normal user functionalities.
@@ -11,8 +10,13 @@ import formers.database.impl.DatabaseImpl;
  *
  */
 public class UserCore {
+    private Database db;
+
+    public UserCore(Database db) {
+        this.db = db;
+    }
+
     public boolean submitForm(FormResponse response) {
-        Database db = new DatabaseImpl();
         db.submitResponse(response);
         return true;
     }

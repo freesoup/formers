@@ -12,8 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import formers.boundary.exception.FormersException;
 import formers.boundary.ui.presenter.FormersPresenter;
-import formers.boundary.ui.presenter.FormersPresenterImpl;
 import formers.core.exception.DatabaseException;
+import formers.factory.ObjectsFactory;
 
 /**
  * Servlet implementation class FormViewServlet Displays the form for users to submit.
@@ -34,7 +34,7 @@ public class UserFormFormatViewServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        FormersPresenter presenter = new FormersPresenterImpl();
+        FormersPresenter presenter = ObjectsFactory.getFormsPresenter();
         String requestID = request.getParameter("requestID");
         String htmlCodes;
         Date expiry;

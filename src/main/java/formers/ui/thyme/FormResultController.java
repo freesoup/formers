@@ -17,6 +17,7 @@ import formers.core.exception.InsufficientAuthorityException;
 import formers.core.form.utils.FormFormat;
 import formers.core.form.utils.FormResponse;
 import formers.core.users.Player;
+import formers.factory.ObjectsFactory;
 
 public class FormResultController implements IFormersController {
 
@@ -26,7 +27,7 @@ public class FormResultController implements IFormersController {
 
         String requestID = request.getParameter("requestID");
         Authorization authority = (Authorization)request.getSession().getAttribute("authority");
-        Player player = new Player();
+        Player player = ObjectsFactory.getPlayer();
         List<FormResponse> listResponse;
         try {
             listResponse = player.viewResultsOfAForm(requestID, authority);

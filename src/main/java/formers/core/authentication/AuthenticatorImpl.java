@@ -5,6 +5,11 @@ import formers.core.exception.DatabaseException;
 import formers.database.impl.DatabaseImpl;
 
 public class AuthenticatorImpl implements Authenticator {
+    private Database db;
+
+    public AuthenticatorImpl(Database db) {
+        this.db = db;
+    }
 
     @Override
     public boolean authenticate(String user, String password) throws DatabaseException {

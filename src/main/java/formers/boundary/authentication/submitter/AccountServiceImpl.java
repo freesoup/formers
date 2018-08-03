@@ -1,32 +1,32 @@
 package formers.boundary.authentication.submitter;
 
 import formers.core.authentication.Authenticator;
-import formers.core.authentication.AuthenticatorImpl;
 import formers.core.authentication.Authorization;
 import formers.core.exception.DatabaseException;
 import formers.core.users.AccountControl;
 
 public class AccountServiceImpl implements AccountService {
+    private AccountControl controller;
+    private Authenticator authenticator;
+
+    public AccountServiceImpl(AccountControl controller, Authenticator authenticator) {
+        this.controller = controller;
+        this.authenticator = authenticator;
+    }
 
     @Override
     public boolean createAccount(String user, String password) {
-        AccountControl controller = new AccountControl();
-
         return controller.createAccount(user, password);
     }
 
     @Override
     public boolean verifyLogIn(String user, String password) throws DatabaseException {
-        Authenticator controller = new AuthenticatorImpl();
-
-        return controller.authenticate(user, password);
+        return authenticator.authenticate(user, password);
     }
 
     @Override
     public Authorization getAuthority(String user) {
-        Authenticator controller = new AuthenticatorImpl();
-
-        return controller.getAuthorityLevel(user);
+        return authenticator.getAuthorityLevel(user);
     }
 
 }

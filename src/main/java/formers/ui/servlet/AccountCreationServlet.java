@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import formers.boundary.authentication.submitter.AccountService;
-import formers.boundary.authentication.submitter.AccountServiceImpl;
+import formers.factory.ObjectsFactory;
 
 /**
  * Servlet implementation class AccountCreationServlet
@@ -39,7 +39,7 @@ public class AccountCreationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // TODO Auto-generated method stub
-        AccountService acservice = new AccountServiceImpl();
+        AccountService acservice = ObjectsFactory.getAccountService();
         boolean success = acservice.createAccount(request.getParameter("newuser"), request.getParameter("newpassword"));
 
         if (!success) {

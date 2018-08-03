@@ -13,6 +13,7 @@ import formers.core.authentication.Authorization;
 import formers.core.exception.DatabaseException;
 import formers.core.exception.InsufficientAuthorityException;
 import formers.core.users.Player;
+import formers.factory.ObjectsFactory;
 
 /**
  * Servlet implementation class AdminDeleteFormServlet
@@ -34,7 +35,7 @@ public class AdminDeleteFormServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // TODO Auto-generated method stub
-        Player player = new Player();
+        Player player = ObjectsFactory.getPlayer();
 
         HttpSession session = request.getSession();
 

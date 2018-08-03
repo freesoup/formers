@@ -9,16 +9,11 @@ import formers.core.exception.InsufficientAuthorityException;
 import formers.core.form.utils.FormFormat;
 import formers.core.form.utils.FormID;
 import formers.core.form.utils.FormResponse;
-import formers.database.impl.DatabaseImpl;
+import formers.factory.ObjectsFactory;
 
 public class Player {
     private AdminCore admin;
     private UserCore user;
-
-    public Player() {
-        admin = new AdminCore();
-        user = new UserCore();
-    }
 
     // For testing using Mockito
     public Player(AdminCore admin, UserCore user) {
@@ -41,8 +36,7 @@ public class Player {
 
     public boolean submitFormFormat(FormFormat form, Authorization authority) throws InsufficientAuthorityException {
         if (authority == Authorization.ADMIN) {
-            Database db = new DatabaseImpl();
-            db.submitNewForm(form);
+            admin.submitFormFormat(form);
             return true;
         } else {
             throw new InsufficientAuthorityException("Please sign up to use this function");
@@ -51,8 +45,7 @@ public class Player {
 
     public List<FormFormat> viewAllForm(String user, Authorization authority) throws InsufficientAuthorityException {
         if (authority == Authorization.ADMIN) {
-            Database db = new DatabaseImpl();
-            List<FormFormat> formatList = db.getAllFormFormat(user);
+            List<FormFormat> formatList = admin.viewAllForm(user);
             return formatList;
         } else {
             throw new InsufficientAuthorityException("Please sign up to use this function");
@@ -63,8 +56,7 @@ public class Player {
     public FormResponse viewResult(String formID, String user, Authorization authority)
             throws InsufficientAuthorityException {
         if (authority == Authorization.ADMIN) {
-            Database db = new DatabaseImpl();
-            FormResponse results = db.getFormResult(user, formID);
+            FormResponse results = admin.viewResult(formID, user);
             return results;
         } else {
             throw new InsufficientAuthorityException("Please sign up to use this function");
@@ -74,8 +66,7 @@ public class Player {
     public List<FormResponse> viewResultsOfAForm(String formID, Authorization authority)
             throws InsufficientAuthorityException {
         if (authority == Authorization.ADMIN) {
-            Database db = new DatabaseImpl();
-            List<FormResponse> listResults = db.getAllFormResponse(formID);
+            List<FormResponse> listResults = admin.viewResultsOfAForm(formID);
             return listResults;
         } else {
             throw new InsufficientAuthorityException("Please sign up to use this function");
@@ -88,8 +79,7 @@ public class Player {
         if (authority == Authorization.ADMIN
                 || authority == Authorization.USER
                 || authority == Authorization.STRANGER) {
-            Database db = new DatabaseImpl();
-            db.submitResponse(response);
+            user.submitForm(response);
             return true;
         } else {
             throw new InsufficientAuthorityException("Please sign up to use this function");
@@ -102,7 +92,7 @@ public class Player {
         if (authority == Authorization.ADMIN
                 || authority == Authorization.USER
                 || authority == Authorization.STRANGER) {
-            FormResponse responses = new FormResponse(userName);
+            FormResponse responses = user.initFormResponse(userName);
             return responses;
         } else {
             throw new InsufficientAuthorityException("Please sign up to use this function");
@@ -111,7 +101,7 @@ public class Player {
 
     // User-admin specific functions
     public FormFormat viewForm(String formID) throws DatabaseException {
-        Database db = new DatabaseImpl();
+        Database db = ObjectsFactory.getDatabase();
         FormFormat form = db.getForm(formID);
         return form;
     }
@@ -119,8 +109,7 @@ public class Player {
     public void deleteAllTracesOf(String formIdToBeDeleted, String user, Authorization authority)
             throws DatabaseException, InsufficientAuthorityException {
         if (authority == Authorization.ADMIN) {
-            Database db = new DatabaseImpl();
-            db.deleteAllTracesOf(formIdToBeDeleted, user);
+            admin.deleteAllTracesOf(formIdToBeDeleted, user);
         } else {
             throw new InsufficientAuthorityException("Please sign up to use this function");
         }

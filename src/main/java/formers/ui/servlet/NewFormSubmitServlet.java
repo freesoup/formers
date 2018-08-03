@@ -10,12 +10,11 @@ import javax.servlet.http.HttpSession;
 
 import formers.boundary.exception.FormersException;
 import formers.boundary.ui.presenter.FormersPresenter;
-import formers.boundary.ui.presenter.FormersPresenterImpl;
 import formers.boundary.ui.submitter.FormersSubmitter;
-import formers.boundary.ui.submitter.FormersSubmitterImpl;
 import formers.core.authentication.Authorization;
 import formers.core.exception.InsufficientAuthorityException;
 import formers.core.form.utils.FormFormat;
+import formers.factory.ObjectsFactory;
 
 /**
  * Servlet implementation class FormSubmitServlet Admin's view after submitting a form format.
@@ -36,7 +35,7 @@ public class NewFormSubmitServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        FormersSubmitter submitterInstance = new FormersSubmitterImpl();
+        FormersSubmitter submitterInstance = ObjectsFactory.getFormsSubmitter();
 
         HttpSession session = request.getSession();
         String user = session.getAttribute("user").toString();
@@ -87,7 +86,7 @@ public class NewFormSubmitServlet extends HttpServlet {
                 "";
 
         if (submittedForm != null) {
-            FormersPresenter presenterInstance = new FormersPresenterImpl();
+            FormersPresenter presenterInstance = ObjectsFactory.getFormsPresenter();
 
             String html = presenterInstance.viewForm(submittedForm);
 

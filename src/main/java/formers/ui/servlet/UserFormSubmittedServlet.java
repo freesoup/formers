@@ -12,11 +12,11 @@ import org.thymeleaf.ITemplateEngine;
 
 import formers.boundary.exception.FormersException;
 import formers.boundary.ui.submitter.FormersSubmitter;
-import formers.boundary.ui.submitter.FormersSubmitterImpl;
 import formers.core.authentication.Authorization;
 import formers.core.exception.DatabaseException;
 import formers.core.exception.InsufficientAuthorityException;
 import formers.core.form.utils.FormResponse;
+import formers.factory.ObjectsFactory;
 import formers.ui.thyme.FormersApp;
 import formers.ui.thyme.IFormersController;
 
@@ -57,7 +57,7 @@ public class UserFormSubmittedServlet extends HttpServlet {
                             + "through a form submission. Please login or re-submit the form.");
         }
 
-        FormersSubmitter submitterInstance = new FormersSubmitterImpl();
+        FormersSubmitter submitterInstance = ObjectsFactory.getFormsSubmitter();
         FormResponse submittedForm;
         try {
             try {

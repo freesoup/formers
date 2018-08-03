@@ -16,6 +16,7 @@ import formers.core.authentication.Authorization;
 import formers.core.exception.InsufficientAuthorityException;
 import formers.core.form.utils.FormFormat;
 import formers.core.users.Player;
+import formers.factory.ObjectsFactory;
 
 public class AdminDashboardController implements IFormersController {
 
@@ -27,7 +28,7 @@ public class AdminDashboardController implements IFormersController {
         String user = (String)session.getAttribute("user");
         Authorization authority = (Authorization)session.getAttribute("authority");
 
-        Player player = new Player();
+        Player player = ObjectsFactory.getPlayer();
         List<FormFormat> listFormat;
         try {
             listFormat = player.viewAllForm(user, authority);

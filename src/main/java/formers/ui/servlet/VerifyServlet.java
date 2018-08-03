@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import formers.boundary.authentication.submitter.AccountService;
-import formers.boundary.authentication.submitter.AccountServiceImpl;
 import formers.boundary.exception.FormersException;
 import formers.core.authentication.Authorization;
 import formers.core.exception.DatabaseException;
+import formers.factory.ObjectsFactory;
 
 /**
  * Servlet implementation class VerifyServlet
@@ -46,7 +46,7 @@ public class VerifyServlet extends HttpServlet {
         String password = request.getParameter("password");
         String target = request.getParameter("target");
 
-        AccountService acservice = new AccountServiceImpl();
+        AccountService acservice = ObjectsFactory.getAccountService();
         boolean success;
         Authorization authority;
 
@@ -58,7 +58,8 @@ public class VerifyServlet extends HttpServlet {
         }
 
         if (target == null) {
-            // Will only be null when User accesses this page directly. Skipping the filter since this class has no filter.
+            // Will only be null when User accesses this page directly. Skipping the filter since this class has no
+            // filter.
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath()));
         }
 

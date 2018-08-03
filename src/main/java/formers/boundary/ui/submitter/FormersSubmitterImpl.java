@@ -16,11 +16,15 @@ import formers.core.form.utils.Response;
 import formers.core.users.Player;
 
 public class FormersSubmitterImpl implements FormersSubmitter {
+    private Player player;
+
+    public FormersSubmitterImpl(Player player) {
+        this.player = player;
+    }
 
     @Override
     public FormFormat submitNewForm(Map<String, String[]> map, String userName, Authorization authority)
             throws InsufficientAuthorityException {
-        Player player = new Player();
         FormFormat newForm = player.initForm(userName, authority);
 
         String[] questions = map.get("question");
@@ -79,7 +83,6 @@ public class FormersSubmitterImpl implements FormersSubmitter {
     @Override
     public FormResponse submitNewResponse(Map<String, String[]> map, String formID, String userName,
             Authorization authority) throws InsufficientAuthorityException, DatabaseException {
-        Player player = new Player();
         FormResponse responses = player.initFormResponse(userName, authority);
         responses.setFormID(formID);
 

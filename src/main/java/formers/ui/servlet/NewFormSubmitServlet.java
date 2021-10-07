@@ -1,13 +1,5 @@
 package formers.ui.servlet;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import formers.boundary.exception.FormersException;
 import formers.boundary.ui.presenter.FormersPresenter;
 import formers.boundary.ui.submitter.FormersSubmitter;
@@ -15,6 +7,13 @@ import formers.core.authentication.Authorization;
 import formers.core.exception.InsufficientAuthorityException;
 import formers.core.form.utils.FormFormat;
 import formers.factory.ObjectsFactory;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 /**
  * Servlet implementation class FormSubmitServlet Admin's view after submitting a form format.
@@ -103,7 +102,7 @@ public class NewFormSubmitServlet extends HttpServlet {
             response.getWriter().append("</form>");
             response.getWriter().append("You may share the form link over at<br>");
             response.getWriter()
-                    .append("<input class='requestlink' value='http://formers.internal.worksap.com:8080/formers/viewform?requestID="
+                    .append("<input class='requestlink' value='" +  request.getServerName() + "/viewform?requestID="
                             + formID
                             + "'>");
 

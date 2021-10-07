@@ -1,13 +1,7 @@
 package formers.database.dto;
 
-import com.worksap.company.dto.annotation.Entity;
-import com.worksap.company.dto.annotation.Key;
-
-@Entity
 public class FormResponseDto {
-    @Key(order = 0)
-    private String formId;
-    @Key(order = 1)
+    private String formID;
     private String formRecipient;
     private String stringJson;
 
@@ -16,20 +10,32 @@ public class FormResponseDto {
     }
 
     public FormResponseDto(String id, String formRecipient, String json) {
-        this.formId = id;
+        this.formID = id;
         this.formRecipient = formRecipient;
         this.stringJson = json;
     }
 
-    private String getFormID() {
-        return formId;
+    public String getFormID() {
+        return formID;
     }
 
-    public String getFormResponse() {
+    public void setFormID(final String formID) {
+        this.formID = formID;
+    }
+
+    public String getStringJson() {
         return stringJson;
     }
 
-    public String getRecipient() {
+    public void setStringJson(final String stringJson) {
+        this.stringJson = stringJson;
+    }
+
+    public String getFormRecipient() {
         return formRecipient;
+    }
+
+    public void setFormRecipient(final String formRecipient) {
+        this.formRecipient = formRecipient;
     }
 }

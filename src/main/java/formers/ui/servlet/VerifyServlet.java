@@ -1,18 +1,17 @@
 package formers.ui.servlet;
 
-import java.io.IOException;
+import formers.boundary.authentication.submitter.AccountService;
+import formers.boundary.exception.FormersException;
+import formers.core.authentication.Authorization;
+import formers.core.exception.DatabaseException;
+import formers.factory.ObjectsFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import formers.boundary.authentication.submitter.AccountService;
-import formers.boundary.exception.FormersException;
-import formers.core.authentication.Authorization;
-import formers.core.exception.DatabaseException;
-import formers.factory.ObjectsFactory;
+import java.io.IOException;
 
 /**
  * Servlet implementation class VerifyServlet
@@ -34,7 +33,7 @@ public class VerifyServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // TODO Auto-generated method stub
-        response.sendRedirect(response.encodeRedirectURL(request.getContextPath()));
+        response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
     }
 
     /**
@@ -60,7 +59,7 @@ public class VerifyServlet extends HttpServlet {
         if (target == null) {
             // Will only be null when User accesses this page directly. Skipping the filter since this class has no
             // filter.
-            response.sendRedirect(response.encodeRedirectURL(request.getContextPath()));
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
         }
 
         if (success) {

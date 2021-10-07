@@ -1,13 +1,8 @@
 package formers.database.dto;
 
-import com.worksap.company.dto.annotation.Entity;
-import com.worksap.company.dto.annotation.Key;
-
 import formers.core.authentication.Authorization;
 
-@Entity
 public class AccountDto {
-    @Key
     String user;
     String hashedPass;
     Authorization authority;
@@ -25,11 +20,23 @@ public class AccountDto {
         return user;
     }
 
+    public void setUser(final String user) {
+        this.user = user;
+    }
+
     public String getHashedPass() {
         return hashedPass;
     }
 
+    public void setHashedPass(final String hashedPass) {
+        this.hashedPass = hashedPass;
+    }
+
     public Authorization getAuthority() {
         return this.authority;
+    }
+
+    public void setAuthority(final Authorization authority) {
+        this.authority = authority;
     }
 }
